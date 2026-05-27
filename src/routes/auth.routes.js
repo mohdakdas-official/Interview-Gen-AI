@@ -1,6 +1,7 @@
 import express from 'express';
+import { loginUserController, logoutUserController, registerUserController } from '../contollers/auth.controller.js';
 
-const authRouter = express.Router();
+const router = express.Router();
 
 /**
  * @route POST /api/auth/register
@@ -8,6 +9,21 @@ const authRouter = express.Router();
  * @access Public
  */
 
-authRouter.post('/register');
+router.post('/register', registerUserController);
 
-export default authRouter;
+/**
+ * @route POST /api/auth/login
+ * @desc Handle user login with email and password
+ * @access Public
+ */
+router.post('/login', loginUserController);
+
+/**
+ * @route GET /api/auth/logout
+ * @desc Clear token from the user cookie and add the token in the blacklist
+ * @access Public
+ */
+router.get('/logout', logoutUserController);
+
+
+export default router;
