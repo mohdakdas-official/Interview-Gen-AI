@@ -1,5 +1,6 @@
 import express from 'express';
-import { loginUserController, logoutUserController, registerUserController } from '../contollers/auth.controller.js';
+import { getMeController, loginUserController, logoutUserController, registerUserController } from '../contollers/auth.controller.js';
+import { authUser } from '../middlewares/auth.middleware.js'
 
 const router = express.Router();
 
@@ -24,6 +25,13 @@ router.post('/login', loginUserController);
  * @access Public
  */
 router.get('/logout', logoutUserController);
+
+/**
+ * @route GET /api/auth/get-me
+ * @desc Get the current logged-in user details
+ * @access Private
+ */
+router.get('/get-me', authUser, getMeController)
 
 
 export default router;
