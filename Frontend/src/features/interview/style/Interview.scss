@@ -1,0 +1,451 @@
+/* Fallback CSS & utility styles for Dashboard component
+   This file provides necessary colors, sizing and glow effects if Tailwind isn't configured.
+   If your project uses Tailwind, these classes won't interfere.
+*/
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #050816;
+}
+
+.dashboard-root {
+  min-height: 100vh;
+  background: #050816;
+  color: #cbd6ea;
+  padding: 20px;
+  box-sizing: border-box;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial;
+}
+
+.dashboard-wrap {
+  display: flex;
+  gap: 20px;
+  max-width: 100%;
+  height: calc(100vh - 40px);
+  margin: 0 auto;
+}
+
+.left-sb {
+  width: 260px;
+  height: 100%;
+  flex-shrink: 0;
+  background: rgba(11, 18, 28, 0.6);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #131826;
+  box-shadow: 0 8px 30px #00000066;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nav-item {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: #9aa6bf;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.nav-item:hover {
+  transform: translateX(6px);
+  color: #fff;
+}
+
+.nav-item.active {
+  color: #fff;
+  border: 1px solid rgba(255, 45, 122, 0.35);
+  box-shadow:
+    0 6px 20px rgba(255, 45, 122, 0.12),
+    0 0 18px rgba(255, 45, 122, 0.08) inset;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 45, 122, 0.02),
+    rgba(255, 45, 122, 0.01)
+  );
+}
+.back-btn {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: whitesmoke;
+  background: linear-gradient(90deg, #520c18, #af164e);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  text-decoration: none;
+}
+.back-btn:hover {
+  transform: translateX(3px);
+  color: #fff;
+}
+.back-btn.active {
+  color: #fff;
+  border: 1px solid rgba(255, 45, 122, 0.35);
+  box-shadow:
+    0 6px 20px rgba(255, 45, 122, 0.12),
+    0 0 18px rgba(255, 45, 122, 0.08) inset;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 45, 122, 0.02),
+    rgba(255, 45, 122, 0.01)
+  );
+}
+
+.center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  scrollbar-width: thin;
+  scrollbar-color: #ff4a4a transparent;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 0 20px 20px 20px;
+  min-width: 0;
+  overflow-y: auto;
+
+  /* Height limit set karne ke liye standard Flexbox tarika */
+  min-height: 0;
+}
+.center::-webkit-scrollbar {
+  width: 8px;
+}
+
+.center::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.center::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff4a4a, #ff2d7a);
+  border-radius: 999px;
+  border: 2px solid transparent;
+}
+
+.center-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+.center-head h3 {
+  margin: 0;
+  color: #e6eefc;
+}
+.center-head .count {
+  color: #8c96aa;
+  font-size: 13px;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.roadmap-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.roadmap-card {
+  background: rgba(14, 21, 36, 0.78);
+  border: 1px solid #1b2335;
+  border-radius: 20px;
+  padding: 22px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.16);
+}
+
+.roadmap-day {
+  font-size: 12px;
+  font-weight: 700;
+  color: #9cff8f;
+  margin-bottom: 8px;
+}
+
+.roadmap-focus {
+  font-size: 16px;
+  font-weight: 700;
+  color: #eef2ff;
+  margin-bottom: 8px;
+}
+
+.roadmap-detail {
+  color: #a9b6d4;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.card {
+  background: rgba(9, 15, 24, 0.6);
+  border: 1px solid #1b2335;
+  border-radius: 20px;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  cursor: pointer;
+}
+.badge {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #2a1b2f, #3d1530);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+}
+.title {
+  color: #e6eefc;
+  font-weight: 600;
+  font-size: 20px;
+  text-align: left;
+  line-height: 1.5;
+}
+.chev {
+  color: #9aa6bf;
+}
+
+.card-body {
+  padding: 12px 6px 2px 50px;
+}
+.label {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.label.purple {
+  background: linear-gradient(90deg, #6b5bdc, #8a6bff);
+  color: #fff;
+}
+.label.green {
+  background: linear-gradient(90deg, #1fe89a, #13c36b);
+  color: #02220f;
+}
+.muted {
+  color: #a9b6d4;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.right-sb {
+  width: 350px;
+  flex-shrink: 0;
+  scrollbar-width: thin;
+  scrollbar-color: #ff4a4a transparent;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.right-sb::-webkit-scrollbar {
+  width: 8px;
+}
+
+.right-sb::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.right-sb::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff4a4a, #ff2d7a);
+  border-radius: 999px;
+  border: 2px solid transparent;
+}
+.score-area {
+  background: rgba(9, 15, 24, 0.6);
+  border: 1px solid #1b2335;
+  padding: 18px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.score-title {
+  color: #9aa6bf;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+.progress-wrap {
+  position: relative;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  width: 110px;
+  height: 110px;
+}
+.progress-ring {
+  transform: rotate(-90deg);
+}
+.progress-inner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-weight: 700;
+}
+.score-sub {
+  color: #7d879b;
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.gap-area {
+  background: rgba(9, 15, 24, 0.6);
+  border: 1px solid #1b2335;
+  padding: 14px;
+  border-radius: 12px;
+}
+.gap-title {
+  color: #9aa6bf;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+.gap-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.gap-item {
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 74, 74, 0.02),
+    /* Slightly tinted background */ rgba(255, 74, 74, 0.01)
+  );
+  /* Updated border color and subtle glow to match the visual UI */
+  border: 1px solid rgba(255, 74, 74, 0.45);
+  box-shadow: 0 0 10px rgba(255, 74, 74, 0.05);
+  transition: all 0.2s ease;
+}
+
+/* Optional hover state to match the overall interactive feel of the dashboard */
+.gap-item:hover {
+  border-color: rgba(255, 74, 74, 0.8);
+  box-shadow: 0 0 12px rgba(255, 74, 74, 0.15);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 900px) {
+  .dashboard-wrap {
+    flex-direction: column;
+    padding: 10px;
+  }
+  .left-sb,
+  .right-sb {
+    width: 100%;
+  }
+}
+
+/* Skeleton Loader */
+
+.skeleton-page {
+  display: flex;
+  gap: 20px;
+  min-height: 100vh;
+  padding: 20px;
+  background: #050816;
+}
+
+.skeleton-sidebar {
+  width: 280px;
+  border-radius: 16px;
+}
+
+.skeleton-content {
+  flex: 1;
+}
+
+.skeleton-title {
+  height: 60px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.skeleton-card {
+  height: 120px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.skeleton-right {
+  width: 300px;
+}
+
+.skeleton-circle {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  margin: auto;
+}
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+  background: #111827;
+}
+
+.shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.12),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
