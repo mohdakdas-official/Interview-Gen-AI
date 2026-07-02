@@ -74,56 +74,6 @@ async function generateWithRetry(payload, retries = 3) {
     throw lastError;
 }
 
-/**
- * Optimized Puppeteer PDF Generator
- */
-const generatePdfFromHtml = async (htmlContent) => {
-    // Linux/Docker environments ke crash issues se bachne ke liye args dale hain
-    const browser = await puppeteer.launch({
-        headless: "new",
-        args: ["--no-sandbox", "--disable-setuid-sandbox"]
-    });
-
-    try {
-        const page = await browser.newPage();
-
-        // Wait until network and DOM elements are completely ready
-        await page.setContent(htmlContent, {
-            waitUntil: ["networkidle0", "domcontentloaded"]
-        });
-
-        // Makes sure that standard screen media CSS styles apply to the print view
-        await page.emulateMediaType('screen');
-
-        // Generate high-quality A4 PDF with background colors turned on
-        const pdfBuffer = await page.pdf({
-            format: "A4",
-            printBackground: true, // Crucial: Iske bina colors aur modern styling print nahi hoti
-            margin: {
-                top: "15mm",
-                bottom: "15mm",
-                left: "15mm",
-                right: "15mm"
-            }
-        });
-
-        return pdfBuffer;
-    } catch (puppeteerError) {
-        console.error("Puppeteer Rendering Error:", puppeteerError);
-        throw new Error("Failed to render HTML into a valid PDF buffer.");
-    } finally {
-        // try...finally ensures browser crashes don't cause server memory leaks
-        await browser.close();
-    }
-};
-
-// ==========================================
-// 3. CORE EXPORTS
-// ==========================================
-
-/**
- * Generate Interview Report (Working fine as per feedback)
- */
 export const generateInteviewReport = async ({
     resume,
     selfDescription,
@@ -199,47 +149,56 @@ Severity can only be: low, medium, high
     }
 };
 
-/**
- * Fixed & Stable Resume PDF Generator
- */
-export const generateResumePdf = async ({ resume, selfDescription, jobDescription }) => {
-    // Clean text prompt to completely avoid template literal/interpolation parsing issues
-    const prompt = `
-Generate a professional resume tailored for the given job description.
+const generatePdfFromHtml = async (htmlContent) => {
+    const browser = await puppeteer.launch()
+    const page = await browser.newPage()
 
-Candidate Resume Data: ${resume}
-Self Description: ${selfDescription}
-Target Job Description: ${jobDescription}
+    await page.setContent(htmlContent, { waitUntil: "networkidle0" })
 
-Requirements:
-1. Populate the resume contents inside the required JSON "html" root field.
-2. Use professional typography (Arial, Helvetica), clean layouts, and nice color accents using standard inline CSS or raw style blocks.
-3. Make sure it sounds natural, human-written, and strictly aligned with the target job description.
-`;
-
-    try {
-        const response = await generateWithRetry({
-            model: "gemini-2.5-flash",
-            contents: prompt,
-            config: {
-                systemInstruction: "You are a precise data processing agent. Output the requested resume structured perfectly inside the provided HTML-string schema format.",
-                responseMimeType: "application/json",
-            }
-        });
-
-        const rawText = response?.text?.trim() || "{}";
-        const jsonContent = JSON.parse(rawText);
-
-        if (!jsonContent || !jsonContent.html) {
-            throw new Error("AI generated the layout, but the 'html' string parameter was empty.");
+    const pdfBuffer = await page.pdf({
+        format: 'A4',
+        margin: {
+            top: '20px',
+            bottom: '20px',
+            left: '20px',
+            right: '20px'
         }
+    })
 
-        // Generate the PDF from the clean, extracted HTML string
-        const pdfBuffer = await generatePdfFromHtml(jsonContent.html);
-        return pdfBuffer;
+    await browser.close()
 
-    } catch (error) {
-        console.error("Error in generateResumePdf workflow:", error);
-        throw error;
-    }
-};
+    return pdfBuffer
+}
+
+export const generateResumePdf = async ({ resume, selfDescription, jobDescription }) => {
+    const resumePdfSchema = z.object({
+        html: z.string().describe("The HTML content of the resume which can be converted to PDF using any library like puppeteer")
+    })
+
+    const prompt = `Generate a resume for a candidate with the following details
+                        Resume: ${resume}
+                        Self Description: ${selfDescription}
+                        Job Description: ${jobDescription}
+                        
+                        The response should be a JSON object with a single field "html" which contains the HTML content of the resume which can be converted to PDF using any library like puppeteer.
+                        The resume should be tailored for the given job description and should highlight the candidate's strengths and relevant experience. The HTML content should be well-formated and structured, making it ease to read and visible appealing.
+                        The content of resume should be not sound like it's generated by AI and should be close as possible to a real human-written resume.
+                        You can highlight the content using some colors or different font styles but the overall design should be simple and professional.
+                        The content should be ATS friendly, i.e. it should be easily parsable byy ATS systems without losing important information.
+                        The resume should not be so lengthy, it should idealy be 1-2 pages long when converted to PDF. Focus on quality rather than quantity and make sure to include all the relevant information that can increase the candidate's chances of getting an interview call for the given job description.
+                    `
+    const response = await ai.models.generateContent({
+        model: "gemini-2.5-flash",
+        contents: prompt,
+        config: {
+            responseMimeType: "application/json",
+            responseSchema: zodToJsonSchema(resumePdfSchema),
+        }
+    })
+
+    const jsonContent = JSON.parse(response.text)
+
+    const pdfBuffer = await generatePdfFromHtml(jsonContent.html)
+
+    return pdfBuffer
+}

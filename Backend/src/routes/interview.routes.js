@@ -1,8 +1,8 @@
 import express from "express";
 import { authUser } from "../middlewares/auth.middleware.js";
-import { generateInterViewController, getAllInterviewReportsController, getInterviewReportByIdController } from "../contollers/interview.controller.js";
+import { generateInterViewController, generateResumePdfController, getAllInterviewReportsController, getInterviewReportByIdController } from "../contollers/interview.controller.js";
 import upload from "../middlewares/file.middleware.js";
-import { generateResumePdf } from "../services/ai.service.js";
+// import { generateResumePdf } from "../services/ai.service.js";
 
 const interviewRouter = express.Router();
 
@@ -28,11 +28,11 @@ interviewRouter.get("/report/:interviewId", authUser, getInterviewReportByIdCont
 interviewRouter.get("/", authUser, getAllInterviewReportsController)
 
 /**
- * @route Get /api/interview/resume/pdf
+ * @route Get /api/interview/resume/pdf/:interviewReportId
  * @description generate resume pdf on the basis of user self description, resume, and job description
  * @access private
  */
-interviewRouter.post("/resume/pdf/:interviewReportId", authUser, generateResumePdf)
+interviewRouter.post("/resume/pdf/:interviewReportId", authUser, generateResumePdfController)
 
 
 export default interviewRouter;

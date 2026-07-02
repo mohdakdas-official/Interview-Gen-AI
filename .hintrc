@@ -11,7 +11,8 @@
           "scrollbar-width: thin",
           "scrollbar-color",
           "scrollbar-width: none",
-          "backdrop-filter"
+          "backdrop-filter",
+          "text-wrap"
         ]
       }
     ]
