@@ -32,12 +32,6 @@ export const generateInterViewController = async (req, res, next) => {
                 message: "Self description and job description are required"
             });
         }
-
-        console.log("========== REQUEST BODY ==========");
-        console.log(req.body);
-
-        console.log("========== RESUME ==========");
-        console.log(resumeText?.substring(0, 500));
         const interviewReportByAi = await generateInteviewReport({
             resume: resumeText,
             selfDescription,
@@ -113,24 +107,70 @@ export const getAllInterviewReportsController = async (req, res) => {
  * @description Controller to generate resume PDF based on user self description , resume, and job description.
  */
 export const generateResumePdfController = async (req, res) => {
-    const { interviewReportId } = req.params
-    const interviewReport = await interviewReportModel.findById(interviewReportId)
+    try {
+        const { interviewReportId } = req.params
+        const interviewReport = await interviewReportModel.findById(interviewReportId)
 
-    if (!interviewReportId) {
-        return res.status(404).json({
-            message: "Interview report not found.",
-            success: false,
+        if (!interviewReportId) {
+            return res.status(404).json({
+                message: "Interview report not found.",
+                success: false,
+            })
+        }
+
+        const { resume, jobDescription, selfDescription } = interviewReport
+
+        const pdfBuffer = await generateResumePdf({ resume, selfDescription, jobDescription })
+
+        res.set({
+            "Content-Type": "application/pdf",
+            "Content-Disposition": `attachment; filename=resume_${interviewReportId}.pdf`
         })
+
+        res.send(pdfBuffer)
+    } catch (error) {
+        console.error("Error generating resume PDF:", error);
+        res.status(503).json({
+            message: "The AI service is currently experiencing high demand. Please try again after a short while.",
+            success: false,
+        });
     }
-
-    const { resume, jobDescription, selfDescription } = interviewReport
-
-    const pdfBuffer = await generateResumePdf({ resume, selfDescription, jobDescription })
-
-    res.set({
-        "Content-Type": "application/pdf",
-        "Content-Disposition": `attachment; filename=resume_${interviewReportId}.pdf`
-    })
-
-    res.send(pdfBuffer)
 }
+
+/**
+ * @description Controller to delete interview report by ID
+ */
+export const deleteInterviewReportController = async (req, res) => {
+    try {
+        const { interviewReportId } = req.params;
+        const userId = req.user._id;
+
+        const report = await interviewReportModel.findById(interviewReportId);
+
+        const ownedReport = await interviewReportModel.findOne({
+            _id: interviewReportId,
+            user: userId,
+        });
+
+        if (!report) {
+            return res.status(404).json({
+                success: false,
+                message: "Report not found",
+            });
+        }
+
+        await report.deleteOne();
+
+        return res.status(200).json({
+            success: true,
+            message: "Report deleted successfully",
+        });
+    } catch (error) {
+        console.error(error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Internal Server Error",
+        });
+    }
+};

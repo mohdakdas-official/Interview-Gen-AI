@@ -1,6 +1,6 @@
 import express from "express";
 import { authUser } from "../middlewares/auth.middleware.js";
-import { generateInterViewController, generateResumePdfController, getAllInterviewReportsController, getInterviewReportByIdController } from "../contollers/interview.controller.js";
+import { deleteInterviewReportController, generateInterViewController, generateResumePdfController, getAllInterviewReportsController, getInterviewReportByIdController } from "../contollers/interview.controller.js";
 import upload from "../middlewares/file.middleware.js";
 // import { generateResumePdf } from "../services/ai.service.js";
 
@@ -33,6 +33,13 @@ interviewRouter.get("/", authUser, getAllInterviewReportsController)
  * @access private
  */
 interviewRouter.post("/resume/pdf/:interviewReportId", authUser, generateResumePdfController)
+
+/**
+ * @route DELETE /api/interview/:interviewId
+ * @description delete interview report by interviewId
+ * @access private
+ */
+interviewRouter.delete("/:interviewReportId", authUser, deleteInterviewReportController);
 
 
 export default interviewRouter;

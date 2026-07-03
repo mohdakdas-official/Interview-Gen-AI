@@ -128,4 +128,9 @@ const interviewReportSchema = new mongoose.Schema({
 
 }, { timestamps: true })
 
+interviewReportSchema.index(
+    { createdAt: 1 },
+    { expireAfterSeconds: 7 * 24 * 60 * 60 }
+);
+
 export const interviewReportModel = mongoose.model("interviewReport", interviewReportSchema) 

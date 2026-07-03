@@ -12,7 +12,8 @@
           "scrollbar-color",
           "scrollbar-width: none",
           "backdrop-filter",
-          "text-wrap"
+          "text-wrap",
+          "text-wrap: nowrap"
         ]
       }
     ]

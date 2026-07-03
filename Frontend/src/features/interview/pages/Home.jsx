@@ -3,14 +3,20 @@ import "../style/home.scss";
 import { Link } from "react-router";
 import { useInterview } from "../hooks/useInterview.js";
 import { useNavigate } from "react-router";
-import { Power } from "lucide-react";
+import { Power, Trash2 } from "lucide-react";
 import { useAuth } from "../../auth/hooks/useAuth";
 
 const Home = () => {
-  const { loading, generateReport, reports, getReports } = useInterview();
+  const { loading, generateReport, reports, getReports, deleteReport } =
+    useInterview();
   const [jobDescription, setJobDescription] = useState("");
   const [selfDescription, setSelfDescription] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
+  const [toast, setToast] = useState({
+    show: false,
+    message: "",
+    type: "",
+  });
   const resumeInputRef = useRef();
   const navigate = useNavigate();
   const { handleLogout, user } = useAuth();
@@ -38,6 +44,36 @@ const Home = () => {
       navigate(`/interview/${data._id}`);
     }
   };
+  const handleDeleteReport = async (interviewReportId) => {
+    if (!window.confirm("Are you sure you want to delete this report?")) {
+      return;
+    }
+
+    try {
+      const response = await deleteReport(interviewReportId);
+
+      showToast(response.message, "success");
+    } catch (error) {
+      showToast(
+        error.response?.data?.message || "Failed to delete report",
+        "error",
+      );
+    }
+  };
+  const showToast = (message, type = "success") => {
+    setToast({
+      show: true,
+      message,
+      type,
+    });
+
+    setTimeout(() => {
+      setToast((prev) => ({
+        ...prev,
+        show: false,
+      }));
+    }, 3000);
+  };
   useEffect(() => {
     getReports();
   }, []);
@@ -48,7 +84,7 @@ const Home = () => {
         <div className="leftSB">
           <div className="profile-tile">
             <Link to="/">
-              <img src="../assets/Main-Logo-Nav.png" alt="Traskify Logo" />
+              <img src="/assets/traskify_logo.png" alt="Traskify logo" />
             </Link>
             <div className="profile-info">
               <span className="welcome-username">
@@ -82,7 +118,33 @@ const Home = () => {
                     <h3>{report.title || "Untitled Position"}</h3>
 
                     <p className="report-meta">
-                      Generated on {new Date(report.createdAt).toLocaleString()}
+                      <span>
+                        Generated on{" "}
+                        {new Date(report.createdAt).toLocaleString()}
+                      </span>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDeleteReport(report._id);
+                        }}
+                        className="delete-report-btn"
+                        style={{
+                          background: "transparent",
+                          border: "none",
+                          padding: 2,
+                          color: "inherit",
+                          hover: { color: "red" },
+                        }}
+                      >
+                        <Trash2
+                          size={"18px"}
+                          style={{
+                            cursor: "pointer",
+                            borderRadius: "20px",
+                            hover: { color: "red" },
+                          }}
+                        />
+                      </button>
                     </p>
                   </li>
                 ))}
@@ -197,7 +259,11 @@ e.g. 'Senior Frontend Engineer at Google requires proficiency in React, TypeScri
             <div className="bottom-bar">
               <span>AI-Powered Strategy Generation • Approx 30s</span>
 
-              <button onClick={handleGenerateReport} disabled={loading}>
+              <button
+                onClick={handleGenerateReport}
+                disabled={loading}
+                id="generate-report-btn"
+              >
                 {loading ? (
                   <>
                     <span className="spinner"></span>
@@ -218,12 +284,49 @@ e.g. 'Senior Frontend Engineer at Google requires proficiency in React, TypeScri
           </div>
         </div>
       </div>
+      {toast.show && (
+        <div className={`toast ${toast.type}`}>
+          <div className="toast-content">
+            <span className="toast-icon">
+              {toast.type === "success" ? "✅" : "❌"}
+            </span>
+
+            <div className="toast-text">
+              <h4>{toast.type === "success" ? "Success" : "Error"}</h4>
+
+              <p>{toast.message}</p>
+            </div>
+          </div>
+
+          <div className="toast-progress"></div>
+        </div>
+      )}
       {loading && (
         <div className="loading-overlay">
           <div className="loader-card">
             <div className="spinner"></div>
-            <h3>Generating Interview Strategy</h3>
-            <p>Analyzing Resume, Job Description and Skills...</p>
+
+            <h2>Generating Your Interview Strategy</h2>
+
+            <p>
+              Our AI is analyzing your resume, job description and experience to
+              create a personalized interview plan.
+            </p>
+
+            <div className="loading-steps">
+              <div>📄 Reading Resume</div>
+              <div>💼 Matching Job Requirements</div>
+              <div>🧠 Finding Skill Gaps</div>
+              <div>🎯 Preparing Interview Strategy</div>
+            </div>
+
+            <div className="loading-progress">
+              <div className="loading-progress-bar"></div>
+            </div>
+
+            <span className="loading-note">
+              This usually takes around <strong>20–30 seconds</strong>.
+            </span>
           </div>
         </div>
       )}
