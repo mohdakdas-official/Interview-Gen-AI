@@ -1,38 +1,529 @@
-main {
-  min-height: 100vh;
-  width: 100%;
+// main {
+//   min-height: 100vh;
+//   width: 100%;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+
+//   .form-container {
+//     min-width: 350px;
+//     display: flex;
+//     flex-direction: column;
+//     gap: 1rem;
+//   }
+
+//   form {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 0.5rem;
+//   }
+//   .input-group {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 0.75rem;
+
+//     input {
+//       border: none;
+//       outline: none;
+//       padding-inline: 1rem;
+//       padding-block: 0.75rem;
+//       border-radius: 0.75rem;
+//     }
+//   }
+
+//   a {
+//     color: #e1034d;
+//     text-decoration: none;
+//   }
+// }
+
+.auth {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
 
-  .form-container {
-    min-width: 350px;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  &__left {
+    width: 75%;
+    height: 100vh;
+    overflow: hidden;
   }
 
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
-  .input-group {
+
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 75%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+  }
+
+  &__right {
+    width: 25%;
+    height: 100vh;
+    background: #050b16;
+    box-shadow: -4px 0 6px -1px rgba(0, 0, 0, 0.6);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  &__content {
+    width: 100%;
+  }
+
+  &__logo-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 32px;
+  }
+
+  &__logo {
+    width: 250px; // Tailwind w-62.5 = 15.625rem = 250px
+    display: block;
+  }
+
+  &__card {
+    // background: #fff;
+    // border: 1px solid #e5e7eb;
+    // border-radius: 16px;
+    // padding: 24px;
+    // box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+    border-radius: 20px;
+    background: rgba(9, 15, 24, 0.7);
+    border: 1px solid #1b2335;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
 
-    input {
-      border: none;
-      outline: none;
-      padding-inline: 1rem;
-      padding-block: 0.75rem;
-      border-radius: 0.75rem;
+  &__title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  &__subtitle {
+    text-align: center;
+    color: #a5adb9;
+    margin-top: 8px;
+    margin-bottom: 0;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 24px;
+    width: 360px;
+  }
+
+  &__input {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 12px 16px;
+    outline: none;
+    transition: all 0.3s ease;
+
+    &:focus {
+      border-color: #d62264;
+      box-shadow: 0 0 0 2px rgba(245, 11, 128, 0.35);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+    &:disabled {
+      background: #f3f4f6;
+      color: #6b7280;
+      border-color: #d1d5db;
+      cursor: not-allowed;
+      opacity: 1;
     }
   }
 
-  a {
-    color: #e1034d;
-    text-decoration: none;
+  &__button {
+    background: #ff2d7a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:disabled {
+      background: #e4286d;
+      color: #b9b9b9;
+      cursor: not-allowed;
+      opacity: 1;
+    }
+
+    &:hover {
+      background: #e4286d;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  &__footer {
+    text-align: center;
+    font-size: 14px;
+    margin: 0;
+  }
+
+  &__link {
+    margin-left: 4px;
+    color: #ff2d7a;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  .auth__error {
+    color: #ef4444;
+    font-size: 13px;
+    margin-top: -10px;
+  }
+  .verify-otp-title {
+    margin-top: 20px;
+  }
+  .toast {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    width: 340px;
+    border-radius: 12px;
+    overflow: hidden;
+    color: white;
+    z-index: 9999;
+
+    animation: slideIn 0.35s ease;
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  }
+
+  .toast.success {
+    background: #16a34a;
+  }
+
+  .toast.Error {
+    background: #dc2626;
+  }
+
+  .toast-content {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 16px;
+  }
+
+  .toast-icon {
+    font-size: 24px;
+  }
+
+  .toast-text h4 {
+    margin: 0;
+    font-size: 16px;
+  }
+
+  .toast-text p {
+    margin: 4px 0 0;
+    font-size: 14px;
+  }
+
+  .toast-progress {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.8);
+
+    animation: progress 3s linear forwards;
+  }
+
+  @keyframes progress {
+    from {
+      width: 100%;
+    }
+
+    to {
+      width: 0%;
+    }
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(120%);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+/* Large Laptop */
+@media (max-width: 1440px) {
+  .auth {
+    &__left {
+      width: 68%;
+    }
+
+    &__overlay {
+      width: 68%;
+    }
+
+    &__right {
+      width: 32%;
+    }
+
+    &__form {
+      width: 100%;
+    }
+  }
+}
+
+/* Laptop */
+@media (max-width: 1200px) {
+  .auth {
+    &__left {
+      width: 60%;
+    }
+
+    &__overlay {
+      width: 60%;
+    }
+
+    &__right {
+      width: 40%;
+    }
+
+    &__logo {
+      width: 220px;
+    }
+
+    &__form {
+      width: 100%;
+    }
+
+    &__card {
+      width: 100%;
+    }
+  }
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+  .auth {
+    flex-direction: column;
+
+    &__left {
+      width: 100%;
+      height: 280px;
+    }
+
+    &__overlay {
+      width: 100%;
+      height: 280px;
+    }
+
+    &__right {
+      width: 100%;
+      height: auto;
+      min-height: calc(100vh - 280px);
+      padding: 40px 25px;
+    }
+
+    &__content {
+      max-width: 500px;
+      margin: auto;
+    }
+
+    &__card {
+      width: 100%;
+    }
+
+    &__form {
+      width: 100%;
+    }
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .auth {
+    &__left {
+      height: 220px;
+    }
+
+    &__overlay {
+      height: 220px;
+    }
+
+    &__right {
+      padding: 30px 18px;
+    }
+
+    &__logo {
+      width: 190px;
+    }
+
+    &__logo-wrapper {
+      margin-bottom: 22px;
+    }
+
+    &__card {
+      padding: 20px;
+      border-radius: 16px;
+    }
+
+    &__title {
+      font-size: 22px;
+    }
+
+    &__subtitle {
+      font-size: 14px;
+    }
+
+    &__form {
+      width: 100%;
+      margin-top: 18px;
+    }
+
+    &__input,
+    &__button {
+      font-size: 15px;
+      padding: 13px 15px;
+    }
+
+    .toast {
+      width: calc(100% - 30px);
+      right: 15px;
+      left: 15px;
+      top: 15px;
+    }
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 576px) {
+  .auth {
+    &__left {
+      height: 180px;
+    }
+
+    &__overlay {
+      height: 180px;
+    }
+
+    &__right {
+      padding: 20px 15px;
+      min-height: calc(100vh - 180px);
+    }
+
+    &__logo {
+      width: 170px;
+    }
+
+    &__card {
+      padding: 18px;
+    }
+
+    &__title {
+      font-size: 20px;
+    }
+
+    &__subtitle {
+      font-size: 13px;
+    }
+
+    &__form {
+      gap: 14px;
+    }
+
+    &__input,
+    &__button {
+      padding: 12px;
+      font-size: 14px;
+    }
+
+    &__footer {
+      font-size: 13px;
+    }
+
+    .toast-content {
+      padding: 14px;
+      gap: 10px;
+    }
+
+    .toast-text h4 {
+      font-size: 14px;
+    }
+
+    .toast-text p {
+      font-size: 13px;
+    }
+
+    .toast-icon {
+      font-size: 20px;
+    }
+  }
+}
+
+/* Extra Small Devices */
+@media (max-width: 360px) {
+  .auth {
+    &__right {
+      padding: 16px 12px;
+    }
+
+    &__card {
+      padding: 15px;
+    }
+
+    &__logo {
+      width: 150px;
+    }
+
+    &__title {
+      font-size: 18px;
+    }
+
+    &__subtitle {
+      font-size: 12px;
+    }
+
+    &__input,
+    &__button {
+      padding: 11px;
+      font-size: 13px;
+    }
+
+    .toast {
+      width: calc(100% - 20px);
+      left: 10px;
+      right: 10px;
+    }
   }
 }

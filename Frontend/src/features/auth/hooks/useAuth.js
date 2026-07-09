@@ -1,34 +1,74 @@
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../auth.context";
-import { login, register, logout, getMe } from "../services/auth.api";
+import { login, register, verifyOtp, logout, getMe } from "../services/auth.api";
 
 export const useAuth = () => {
     const context = useContext(AuthContext)
-    const { user, setUser, loading, setLoading } = context
+    const { user, setUser, loading, setLoading, authimg } = context
 
     const handleLogin = async ({ email, password }) => {
-        setLoading(true)
-        try {
-            const data = await login({ email, password })
-            setUser(data.user)
-        } catch (error) {
-            console.log(error);
-        } finally {
-            setLoading(false)
-        }
-    }
+        setLoading(true);
 
-    const handleRegister = async ({ username, email, password }) => {
-        setLoading(true)
         try {
-            const data = await register({ username, email, password })
-            setUser(data.user)
+            const data = await login({ email, password });
+
+            setUser(data.user);
+
+            return data;
+        } catch (error) {
+            throw error;
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleRegister = async ({
+        username,
+        email,
+        password,
+        isAcceptTermsConditions
+    }) => {
+        setLoading(true);
+
+        try {
+            const data = await register({
+                username,
+                email,
+                password,
+                isAcceptTermsConditions
+            });
+
+            return data;
         } catch (error) {
             console.log(error);
+            throw error;
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
-    }
+    };
+
+    const handleVerifyOtp = async ({ username, email, password, isAcceptTermsConditions, otp }) => {
+        setLoading(true);
+
+        try {
+            const data = await verifyOtp({
+                username,
+                email,
+                password,
+                isAcceptTermsConditions,
+                otp,
+            });
+
+            setUser(data.user);
+
+            return data;
+        } catch (error) {
+            console.log(error);
+            throw error;
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const handleLogout = async () => {
         setLoading(true)
@@ -37,6 +77,7 @@ export const useAuth = () => {
             setUser(null)
         } catch (error) {
             console.log(error);
+            throw error;
         } finally {
             setLoading(false)
         }
@@ -47,16 +88,20 @@ export const useAuth = () => {
         const getAndSetUser = async () => {
             try {
                 const data = await getMe();
-                setUser(data.user);
+
+                if (data?.user) {
+                    setUser(data.user);
+                }
             } catch (error) {
                 console.log(error);
             } finally {
                 setLoading(false);
             }
         };
+
         getAndSetUser();
-    });
+    }, []);
 
 
-    return { user, loading, handleRegister, handleLogin, handleLogout }
+    return { user, loading, handleRegister, handleVerifyOtp, handleLogin, handleLogout, authimg }
 }

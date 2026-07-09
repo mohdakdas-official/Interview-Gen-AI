@@ -22,6 +22,7 @@ export const useInterview = () => {
             return response.interviewReport;
         } catch (error) {
             console.error(error);
+            throw error;
         } finally {
             setLoading(false)
         }
@@ -34,6 +35,7 @@ export const useInterview = () => {
             return response.interviewReport;
         } catch (error) {
             console.error(error);
+            throw error;
         } finally {
             setLoading(false)
         }
@@ -46,6 +48,7 @@ export const useInterview = () => {
             return response.interviewReports;
         } catch (error) {
             console.error(error);
+            throw error;
         } finally {
             setLoading(false)
         }
@@ -61,15 +64,16 @@ export const useInterview = () => {
             link.setAttribute('download', `resume_${interviewReportId}.pdf`);
             document.body.appendChild(link);
             link.click()
+            return response;
         } catch (error) {
             console.error(error);
 
-            const message =
-                error.response?.data?.message ||
-                error.message ||
-                "Something went wrong while generating resume.";
+            // const message =
+            //     error.response?.data?.message ||
+            //     error.message ||
+            //     "Something went wrong while generating resume.";
 
-            alert(message);
+            // alert(message);
 
             throw error;
         } finally {

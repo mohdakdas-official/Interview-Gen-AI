@@ -10,18 +10,22 @@ const api = axios.create({
  */
 
 export const generateInterviewReport = async ({ jobDescription, selfDescription, resumeFile }) => {
-    const formData = new FormData();
-    formData.append("jobDescription", jobDescription);
-    formData.append("selfDescription", selfDescription);
-    formData.append("resume", resumeFile);
+    try {
+        const formData = new FormData();
+        formData.append("jobDescription", jobDescription);
+        formData.append("selfDescription", selfDescription);
+        formData.append("resume", resumeFile);
 
-    const response = await api.post("/api/interview", formData, {
-        headers: {
-            "Content-Type": "multipart/form-data",
-        },
-    });
+        const response = await api.post("/api/interview", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
 
-    return response.data;
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
 }
 
 /**
@@ -29,9 +33,13 @@ export const generateInterviewReport = async ({ jobDescription, selfDescription,
  */
 
 export const getInterviewReportById = async (interviewId) => {
-    const response = await api.get(`/api/interview/report/${interviewId}`)
+    try {
+        const response = await api.get(`/api/interview/report/${interviewId}`)
 
-    return response.data
+        return response.data
+    } catch (error) {
+        throw error;
+    }
 }
 
 /**
@@ -39,9 +47,13 @@ export const getInterviewReportById = async (interviewId) => {
  */
 
 export const getAllInterviewReports = async () => {
-    const response = await api.get("/api/interview")
+    try {
+        const response = await api.get("/api/interview")
 
-    return response.data
+        return response.data
+    } catch (error) {
+        throw error;
+    }
 }
 
 /**
@@ -50,22 +62,30 @@ export const getAllInterviewReports = async () => {
  */
 
 export const generateResumePdf = async ({ interviewReportId }) => {
-    const response = await api.post(`/api/interview/resume/pdf/${interviewReportId}`, null, {
-        responseType: 'blob'
-    })
+    try {
+        const response = await api.post(`/api/interview/resume/pdf/${interviewReportId}`, null, {
+            responseType: 'blob'
+        })
 
-    return response.data
+        return response.data
+    }
+    catch (error) {
+        throw error;
+    }
 }
-
 /**
  * @description Service to delete interview report by interviewReportId
  */
 export const deleteInterviewReport = async (interviewReportId) => {
-    const response = await api.delete(`/api/interview/${interviewReportId}`,
-        {
-            withCredentials: true,
-        }
-    );
+    try {
+        const response = await api.delete(`/api/interview/${interviewReportId}`,
+            {
+                withCredentials: true,
+            }
+        );
 
-    return response.data;
+        return response.data;
+    } catch (error) {
+        throw error
+    }
 };

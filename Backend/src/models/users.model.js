@@ -20,7 +20,17 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-    }
+    },
+    isAcceptTermsConditions: {
+        type: Boolean,
+        required: true,
+        default: false,
+    },
+    isVerified: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
 }, { timestamps: true })
 
 export const User = mongoose.model('User', userSchema);

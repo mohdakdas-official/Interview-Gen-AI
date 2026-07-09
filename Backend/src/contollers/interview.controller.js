@@ -9,27 +9,28 @@ import { success } from 'zod';
 export const generateInterViewController = async (req, res, next) => {
     try {
         const resumeFile = req.file;
-        if (!resumeFile) {
-            return res.status(400).json({
-                message: "Resume PDF is required",
-                success: false
-            });
-        }
-
         const resumeContent = await (new pdfParse.PDFParse(Uint8Array.from(resumeFile.buffer))).getText();
         const resumeText = resumeContent?.text?.slice(0, 15000);
+        const { selfDescription, jobDescription } = req.body;
+        if (!resumeFile || !selfDescription || !jobDescription) {
+            if (!resumeFile) {
+                return res.status(400).json({
+                    message: "Resume PDF is required",
+                    success: false
+                });
+            }
 
+            if (!selfDescription || !jobDescription) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Self description and job description are required"
+                });
+            }
+        }
         if (!resumeText) {
             return res.status(400).json({
                 success: false,
                 message: "Unable to extract text from PDF"
-            });
-        }
-        const { selfDescription, jobDescription } = req.body;
-        if (!selfDescription || !jobDescription) {
-            return res.status(400).json({
-                success: false,
-                message: "Self description and job description are required"
             });
         }
         const interviewReportByAi = await generateInteviewReport({

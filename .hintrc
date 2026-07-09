@@ -13,7 +13,8 @@
           "scrollbar-width: none",
           "backdrop-filter",
           "text-wrap",
-          "text-wrap: nowrap"
+          "text-wrap: nowrap",
+          "text-wrap: wrap"
         ]
       }
     ]

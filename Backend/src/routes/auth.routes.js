@@ -1,5 +1,5 @@
 import express from 'express';
-import { getMeController, loginUserController, logoutUserController, registerUserController } from '../contollers/auth.controller.js';
+import { getMeController, loginUserController, logoutUserController, registerUserController, verifyOtpController } from '../contollers/auth.controller.js';
 import { authUser } from '../middlewares/auth.middleware.js'
 
 const router = express.Router();
@@ -11,6 +11,13 @@ const router = express.Router();
  */
 
 router.post('/register', registerUserController);
+
+/**
+ * @route POST /api/auth/verify-otp
+ * @desc Handle otp verification and creating new user
+ * @access Public
+ */
+router.post("/verify-otp", verifyOtpController);
 
 /**
  * @route POST /api/auth/login
