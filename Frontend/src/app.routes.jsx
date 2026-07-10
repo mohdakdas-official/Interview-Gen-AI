@@ -16,6 +16,7 @@ import Settings from "./features/admin/pages/Settings";
 import AdminLogin from "./features/admin/pages/AdminLogin";
 import AdminProtected from "./features/admin/components/AdminProtected";
 import AdminPublicRoute from "./features/admin/components/AdminPublicRoutes";
+import ForgotPassword from "./features/auth/pages/ForgotPassword";
 
 export const router = createBrowserRouter([
   {
@@ -103,5 +104,9 @@ export const router = createBrowserRouter([
         <AdminLogin />
       </AdminPublicRoute>
     ),
+  },
+  {
+    path: "/forgot-password",
+    element: <ForgotPassword />,
   },
 ]);

@@ -1,28 +1,5 @@
 import "../styles/admin.css";
-
-// const users = [
-//   {
-//     id: 1,
-//     name: "Charlie",
-//     email: "charlie@gmail.com",
-//     joined: "Today",
-//     reports: 5,
-//   },
-//   {
-//     id: 2,
-//     name: "Alex",
-//     email: "alex@gmail.com",
-//     joined: "Yesterday",
-//     reports: 2,
-//   },
-//   {
-//     id: 3,
-//     name: "Emma",
-//     email: "emma@gmail.com",
-//     joined: "2 Days Ago",
-//     reports: 7,
-//   },
-// ];
+import { NavLink } from "react-router";
 
 export default function RecentUsers({ users }) {
   return (
@@ -30,9 +7,12 @@ export default function RecentUsers({ users }) {
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-xl font-semibold">Recent Users</h2>
 
-        <button className="text-blue-400 hover:text-blue-300 text-sm">
+        <NavLink
+          to={"/admin/users"}
+          className="cursor-pointer rounded-lg border border-zinc-700 px-4 py-2 text-sm text-white transition hover:bg-zinc-800"
+        >
           View All
-        </button>
+        </NavLink>
       </div>
 
       <div className="space-y-4">

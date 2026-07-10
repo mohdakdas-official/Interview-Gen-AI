@@ -284,3 +284,156 @@ export const getMeController = async (req, res) => {
         }
     })
 }
+
+export const forgotPasswordController = async (req, res) => {
+    try {
+        const { email } = req.body;
+
+        if (!email) {
+            return res.status(400).json({
+                success: false,
+                message: "Email is required",
+            });
+        }
+
+        // Check user exists
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "No account found with this email",
+            });
+        }
+
+        // Generate OTP
+        const otp = generateOtp();
+
+        // Remove previous OTP
+        await OTP.deleteMany({ email });
+
+        // Save new OTP
+        await OTP.create({
+            email,
+            otp,
+            expiresAt: new Date(Date.now() + 5 * 60 * 1000), // 5 minutes
+        });
+
+        // Send email
+        await sendOtpEmail(email, otp);
+
+        return res.status(200).json({
+            success: true,
+            message: "OTP sent successfully",
+        });
+
+    } catch (error) {
+        console.log(error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Internal Server Error",
+        });
+    }
+};
+
+export const verifyForgotPasswordOtpController = async (req, res) => {
+    try {
+        const { email, otp } = req.body;
+
+        if (!email || !otp) {
+            return res.status(400).json({
+                success: false,
+                message: "Email and OTP are required",
+            });
+        }
+
+        // Find OTP
+        const otpRecord = await OTP.findOne({ email });
+
+        if (!otpRecord) {
+            return res.status(400).json({
+                success: false,
+                message: "OTP not found",
+            });
+        }
+
+        // Check expiry
+        if (otpRecord.expiresAt < new Date()) {
+            await OTP.deleteOne({ _id: otpRecord._id });
+
+            return res.status(400).json({
+                success: false,
+                message: "OTP has expired",
+            });
+        }
+
+        // Check OTP
+        if (otpRecord.otp !== otp) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid OTP",
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "OTP verified successfully",
+        });
+
+    } catch (error) {
+        console.log(error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Internal Server Error",
+        });
+    }
+};
+
+export const resetPasswordController = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res.status(400).json({
+                success: false,
+                message: "Email and password are required",
+            });
+        }
+
+        // Check user
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found",
+            });
+        }
+
+        // Hash password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Update password
+        user.password = hashedPassword;
+
+        await user.save();
+
+        // Delete OTP
+        await OTP.deleteMany({ email });
+
+        return res.status(200).json({
+            success: true,
+            message: "Password reset successfully",
+        });
+
+    } catch (error) {
+        console.log(error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Internal Server Error",
+        });
+    }
+};

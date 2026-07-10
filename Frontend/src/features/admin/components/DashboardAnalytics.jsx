@@ -71,7 +71,7 @@ export default function DashboardAnalytics({ charts }) {
 
       <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6">
         <div className="mb-6">
-          <h2 className="text-xl font-semibold">Users Growth</h2>
+          <h2 className="text-xl font-semibold">Users Overview</h2>
 
           <p className="mt-1 text-sm text-zinc-500">
             Registered users this week

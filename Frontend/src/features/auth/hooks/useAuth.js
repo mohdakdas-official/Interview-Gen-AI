@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../auth.context";
-import { login, register, verifyOtp, logout, getMe } from "../services/auth.api";
+import { login, register, verifyOtp, logout, getMe, forgotPassword, verifyForgotEmail, resetPassword } from "../services/auth.api";
 
 export const useAuth = () => {
     const context = useContext(AuthContext)
@@ -83,6 +83,54 @@ export const useAuth = () => {
         }
     }
 
+    const handleForgotPassword = async ({ email }) => {
+        setLoading(true);
+
+        try {
+            const data = await forgotPassword({ email });
+
+            return data;
+        } catch (error) {
+            throw error;
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleVerifyForgotEmail = async ({ email, otp }) => {
+        setLoading(true);
+
+        try {
+            const data = await verifyForgotEmail({
+                email,
+                otp,
+            });
+
+            return data;
+        } catch (error) {
+            throw error;
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleResetPassword = async ({ email, password }) => {
+        setLoading(true);
+
+        try {
+            const data = await resetPassword({
+                email,
+                password,
+            });
+
+            return data;
+        } catch (error) {
+            throw error;
+        } finally {
+            setLoading(false);
+        }
+    };
+
 
     useEffect(() => {
         const getAndSetUser = async () => {
@@ -103,5 +151,9 @@ export const useAuth = () => {
     }, []);
 
 
-    return { user, loading, handleRegister, handleVerifyOtp, handleLogin, handleLogout, authimg }
+    return {
+        user, loading, handleRegister, handleVerifyOtp, handleLogin, handleLogout, authimg, handleForgotPassword,
+        handleVerifyForgotEmail,
+        handleResetPassword
+    }
 }

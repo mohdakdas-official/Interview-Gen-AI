@@ -167,12 +167,28 @@ const Login = () => {
                   {loading ? "Logging in..." : "Login"}
                 </button>
 
-                <p className="auth__footer">
-                  Don't have an account?
-                  <Link to={"/register"} className="auth__link">
-                    register
-                  </Link>
-                </p>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <p className="auth__footer">
+                    Forgot your password?
+                    <br />
+                    <Link to={"/forgot-password"} className="auth__link">
+                      Click Here
+                    </Link>
+                  </p>
+                  <p className="auth__footer">
+                    Don't have an account?
+                    <br />
+                    <Link to={"/register"} className="auth__link">
+                      register
+                    </Link>
+                  </p>
+                </div>
               </form>
             </div>
           </div>

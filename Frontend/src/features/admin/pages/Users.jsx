@@ -275,14 +275,14 @@ export default function Users() {
                     setDeleteModal(false);
                     setSelectedUser(null);
                   }}
-                  className="flex-1 rounded-xl border border-zinc-700 py-3 font-medium transition hover:bg-zinc-800"
+                  className="flex-1 rounded-xl border border-zinc-700 py-3 font-medium transition hover:bg-zinc-800 cursor-pointer"
                 >
                   Cancel
                 </button>
 
                 <button
                   onClick={confirmDelete}
-                  className="flex-1 rounded-xl bg-red-600 py-3 font-medium transition hover:bg-red-700"
+                  className="flex-1 rounded-xl bg-red-600 py-3 font-medium transition hover:bg-red-700 cursor-pointer"
                 >
                   Delete User
                 </button>

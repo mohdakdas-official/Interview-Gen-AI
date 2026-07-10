@@ -1,5 +1,5 @@
 import express from 'express';
-import { getMeController, loginUserController, logoutUserController, registerUserController, verifyOtpController } from '../contollers/auth.controller.js';
+import { forgotPasswordController, getMeController, loginUserController, logoutUserController, registerUserController, resetPasswordController, verifyForgotPasswordOtpController, verifyOtpController } from '../contollers/auth.controller.js';
 import { authUser } from '../middlewares/auth.middleware.js'
 
 const router = express.Router();
@@ -39,6 +39,15 @@ router.get('/logout', logoutUserController);
  * @access Private
  */
 router.get('/get-me', authUser, getMeController)
+
+router.post("/forgot-password", forgotPasswordController);
+
+router.post(
+    "/verify-forgot-password-otp",
+    verifyForgotPasswordOtpController
+);
+
+router.post("/reset-password", resetPasswordController);
 
 
 export default router;

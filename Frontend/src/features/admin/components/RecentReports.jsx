@@ -1,45 +1,6 @@
 import "../styles/admin.css";
-
+import { NavLink } from "react-router";
 import { Eye, Download, Trash2 } from "lucide-react";
-
-// const reports = [
-//   {
-//     id: 1,
-//     candidate: "Charlie",
-//     email: "charlie@gmail.com",
-//     role: "Frontend Developer",
-//     score: 91,
-//     date: "Today, 10:20 AM",
-//     status: "Completed",
-//   },
-//   {
-//     id: 2,
-//     candidate: "Alex",
-//     email: "alex@gmail.com",
-//     role: "MERN Stack Developer",
-//     score: 84,
-//     date: "Today, 09:05 AM",
-//     status: "Completed",
-//   },
-//   {
-//     id: 3,
-//     candidate: "John",
-//     email: "john@gmail.com",
-//     role: "Backend Developer",
-//     score: 77,
-//     date: "Yesterday",
-//     status: "Pending",
-//   },
-//   {
-//     id: 4,
-//     candidate: "Emma",
-//     email: "emma@gmail.com",
-//     role: "React Developer",
-//     score: 95,
-//     date: "Yesterday",
-//     status: "Completed",
-//   },
-// ];
 
 export default function RecentReports({ reports }) {
   return (
@@ -54,9 +15,12 @@ export default function RecentReports({ reports }) {
           </p>
         </div>
 
-        <button className="rounded-lg border border-zinc-700 px-4 py-2 text-sm text-white transition hover:bg-zinc-800">
+        <NavLink
+          to={"/admin/reports"}
+          className="rounded-lg border border-zinc-700 px-4 py-2 text-sm text-white transition hover:bg-zinc-800"
+        >
           View All
-        </button>
+        </NavLink>
       </div>
 
       {/* Table */}

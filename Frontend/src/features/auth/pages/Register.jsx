@@ -53,6 +53,9 @@ const Register = () => {
 
       return;
     }
+    if (password.length < 8) {
+      showToast("Password must be at least 8 characters long.");
+    }
     if (!isAcceptTermsConditions) {
       showToast("Please accept the Terms & Conditions.", "error");
       return;

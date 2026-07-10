@@ -59,3 +59,36 @@ export const getMe = async () => {
 
     }
 }
+
+export const forgotPassword = async ({ email }) => {
+    try {
+        const response = await api.post("/api/auth/forgot-password", { email })
+
+        return response.data
+    } catch (error) {
+        throw error;
+
+    }
+}
+
+export const verifyForgotEmail = async ({ email, otp }) => {
+    try {
+        const response = await api.post("/api/auth/verify-forgot-password-otp", { email, otp })
+
+        return response.data
+    } catch (error) {
+        throw error;
+
+    }
+}
+
+export const resetPassword = async ({ email, password }) => {
+    try {
+        const response = await api.post("/api/auth/reset-password", { email, password })
+
+        return response.data
+    } catch (error) {
+        throw error;
+
+    }
+}

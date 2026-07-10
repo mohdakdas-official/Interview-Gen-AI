@@ -130,10 +130,10 @@ export default function OverviewWidgets({
             Refresh Analytics
           </button>
 
-          <button className="flex w-full items-center gap-3 rounded-xl bg-zinc-800 p-3 transition hover:bg-zinc-700 cursor-pointer">
+          <NavLink to={"/admin/reports"} className="flex w-full items-center gap-3 rounded-xl bg-zinc-800 p-3 transition hover:bg-zinc-700 cursor-pointer">
             <FileDown size={18} />
-            Export Reports
-          </button>
+            Manage Reports
+          </NavLink>
 
           <NavLink
             to={"/admin/users"}
