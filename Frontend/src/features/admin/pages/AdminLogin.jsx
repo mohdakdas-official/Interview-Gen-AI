@@ -77,7 +77,7 @@ export default function AdminLogin() {
       setForm({ email: "", password: "" });
 
       setTimeout(() => {
-        navigate("/admin");
+        navigate("/IGAI-admin");
       }, 2000);
     } catch (error) {
       setToast({
@@ -96,12 +96,6 @@ export default function AdminLogin() {
     } finally {
       setFormDisabled(false);
     }
-
-    // TODO:
-    // const {data}=await adminLogin(form)
-    // if(data.success){
-    //    navigate("/admin")
-    // }
   };
 
   return (
@@ -122,7 +116,44 @@ export default function AdminLogin() {
         <meta name="author" content="InterviewGen AI" />
         <meta name="robots" content="noindex, nofollow" />
 
-        <link rel="canonical" href="https://your-domain.com/admin/login" />
+        <link
+          rel="canonical"
+          href="https://interviewgen-ai.vercel.app/IGAI-admin/login"
+        />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:title"
+          content="Super Admin Login | InterviewGen AI"
+        />
+        <meta
+          property="og:description"
+          content="Secure Super Admin login for InterviewGen AI administration panel."
+        />
+        <meta
+          property="og:url"
+          content="https://interviewgen-ai.vercel.app/IGAI-admin/login"
+        />
+        <meta
+          property="og:image"
+          content="https://interviewgen-ai.vercel.app/og-image.png"
+        />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Super Admin Login | InterviewGen AI"
+        />
+        <meta
+          name="twitter:description"
+          content="Secure Super Admin login for InterviewGen AI administration panel."
+        />
+        <meta
+          name="twitter:image"
+          content="https://interviewgen-ai.vercel.app/og-image.png"
+        />
       </Helmet>
       <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-zinc-950 px-4">
         {/* Background Glow */}

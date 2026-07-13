@@ -24,7 +24,7 @@ export default function AdminPublicRoute({ children }) {
   if (loading) return null;
 
   if (isAdmin) {
-    return <Navigate to="/admin" replace />;
+    return <Navigate to="/IGAI-admin" replace />;
   }
 
   return children;

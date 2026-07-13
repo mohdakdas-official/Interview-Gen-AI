@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router";
 
-import { Mail, KeyRound, Lock } from "lucide-react";
+import { Mail, KeyRound, Lock, Sparkles } from "lucide-react";
 
 import { useAuth } from "../hooks/useAuth";
-// import Toast from "../../admin/components/Toast";
 
 import React from "react";
 
@@ -182,21 +181,71 @@ const ForgotPassword = () => {
           content="Reset your InterviewGen AI account password securely using email verification."
         />
 
-        <meta name="robots" content="noindex,nofollow" />
+        <meta
+          name="keywords"
+          content="Forgot Password, Reset Password, InterviewGen AI, Account Recovery"
+        />
+
+        <meta name="robots" content="noindex, nofollow" />
+        <meta name="author" content="InterviewGen AI" />
+
+        <link
+          rel="canonical"
+          href="https://interviewgen-ai.vercel.app/forgot-password"
+        />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Forgot Password | InterviewGen AI" />
+        <meta
+          property="og:description"
+          content="Reset your InterviewGen AI account password securely."
+        />
+        <meta
+          property="og:url"
+          content="https://interviewgen-ai.vercel.app/forgot-password"
+        />
+        <meta
+          property="og:image"
+          content="https://interviewgen-ai.vercel.app/og-image.png"
+        />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Forgot Password | InterviewGen AI"
+        />
+        <meta
+          name="twitter:description"
+          content="Reset your InterviewGen AI account password securely."
+        />
+        <meta
+          name="twitter:image"
+          content="https://interviewgen-ai.vercel.app/og-image.png"
+        />
       </Helmet>
       <section className="min-h-screen bg-[#09090B] flex items-center justify-center px-5 py-10">
         <div className="w-full max-w-md">
           {/* Card */}
 
-          <div className="rounded-3xl border border-zinc-800 bg-zinc-900 p-10 shadow-[0_0_60px_rgba(37,99,235,0.12)]">
+          <div className="rounded-3xl border border-zinc-800 bg-zinc-900 p-10 shadow-[0_0_60px_rgba(255,45,122,0.12)]">
             {" "}
             {/* Logo */}
             <div className="mb-8 flex justify-center">
-              <img
-                src="/assets/traskify_main_logo.png"
-                alt="InterviewGen AI"
-                className="mx-auto h-20 w-auto"
-              />
+              <Link to="/" className="flex items-center gap-3">
+                <div className="w-11 h-11 rounded-xl bg-[#FF025E] flex items-center justify-center">
+                  <Sparkles size={20} />
+                </div>
+
+                <div>
+                  <h2 className="font-bold text-xl">Interview Gen AI</h2>
+
+                  <p className="text-xs text-gray-400">
+                    AI Interview Assistant
+                  </p>
+                </div>
+              </Link>
             </div>
             {/* Heading */}
             <div className="space-y-8">
@@ -226,10 +275,10 @@ const ForgotPassword = () => {
                       Email Address
                     </label>
 
-                    <div className="group flex items-center rounded-xl border border-zinc-700 bg-zinc-950 px-4 transition focus-within:border-blue-500">
+                    <div className="group flex items-center rounded-xl border border-zinc-700 bg-zinc-950 px-4 transition focus-within:border-[#FF2D7A]">
                       <Mail
                         size={20}
-                        className="text-zinc-500 group-focus-within:text-blue-500 transition"
+                        className="text-zinc-500 group-focus-within:text-[#FF2D7A] transition"
                       />
 
                       <input
@@ -253,7 +302,7 @@ const ForgotPassword = () => {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full cursor-pointer rounded-xl bg-blue-600 py-4 text-base font-semibold transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
+                    className="w-full cursor-pointer rounded-xl bg-[#FF2D7A] py-4 text-base font-semibold transition hover:bg-[#dd1f65] disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     {loading ? "Sending OTP..." : "Send OTP"}
                   </button>
@@ -262,7 +311,7 @@ const ForgotPassword = () => {
                     Remember your password?{" "}
                     <Link
                       to="/login"
-                      className="font-medium text-blue-500 hover:underline"
+                      className="font-medium text-[#FF2D7A] hover:underline"
                     >
                       Login
                     </Link>
@@ -276,10 +325,10 @@ const ForgotPassword = () => {
                       Registered Email
                     </label>
 
-                    <div className="group flex items-center rounded-xl border border-zinc-700 bg-zinc-950 px-4 transition focus-within:border-blue-500">
+                    <div className="group flex items-center rounded-xl border border-zinc-700 bg-zinc-950 px-4 transition focus-within:border-[#FF2D7A]">
                       <Mail
                         size={20}
-                        className="text-zinc-500 group-focus-within:text-blue-500 transition"
+                        className="text-zinc-500 group-focus-within:text-[#FF2D7A] transition"
                       />
 
                       <input
@@ -296,7 +345,7 @@ const ForgotPassword = () => {
                       Enter OTP
                     </label>
 
-                    <div className="group flex items-center rounded-xl border border-zinc-700 bg-zinc-950 px-4 transition focus-within:border-blue-500">
+                    <div className="group flex items-center rounded-xl border border-zinc-700 bg-zinc-950 px-4 transition focus-within:border-[#FF2D7A]">
                       <KeyRound className="text-zinc-500" size={20} />
 
                       <input
@@ -330,7 +379,7 @@ const ForgotPassword = () => {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full cursor-pointer rounded-xl bg-blue-600 py-4 text-base font-semibold transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
+                    className="w-full cursor-pointer rounded-xl bg-[#FF2D7A] py-4 text-base font-semibold transition hover:bg-[#dd1f65] disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     {loading ? "Verifying..." : "Verify OTP"}
                   </button>
@@ -346,7 +395,7 @@ const ForgotPassword = () => {
                       onClick={handleSendOtp}
                       className={`font-medium cursor-pointer transition ${
                         canResend
-                          ? "text-blue-500 hover:text-blue-400"
+                          ? "text-[#FF2D7A] hover:text-blue-400"
                           : "cursor-not-allowed text-zinc-500"
                       }`}
                     >
@@ -362,7 +411,7 @@ const ForgotPassword = () => {
                       New Password
                     </label>
 
-                    <div className="group flex items-center rounded-xl border border-zinc-700 bg-zinc-950 px-4 transition focus-within:border-blue-500">
+                    <div className="group flex items-center rounded-xl border border-zinc-700 bg-zinc-950 px-4 transition focus-within:border-[#FF2D7A]">
                       <Lock className="text-zinc-500" size={20} />
 
                       <input
@@ -388,7 +437,7 @@ const ForgotPassword = () => {
                       Confirm Password
                     </label>
 
-                    <div className="group flex items-center rounded-xl border border-zinc-700 bg-zinc-950 px-4 transition focus-within:border-blue-500">
+                    <div className="group flex items-center rounded-xl border border-zinc-700 bg-zinc-950 px-4 transition focus-within:border-[#FF2D7A]">
                       <Lock className="text-zinc-500" size={20} />
 
                       <input
@@ -412,7 +461,7 @@ const ForgotPassword = () => {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full cursor-pointer rounded-xl bg-blue-600 py-4 text-base font-semibold transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
+                    className="w-full cursor-pointer rounded-xl bg-[#FF2D7A] py-4 text-base font-semibold transition hover:bg-[#dd1f65] disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     {loading ? "Resetting..." : "Reset Password"}
                   </button>

@@ -11,11 +11,9 @@ const App = () => {
   return (
     <HelmetProvider>
       <AuthProvider>
-        <AdminProvider>
-          <InterviewProvider>
-            <RouterProvider router={router} />
-          </InterviewProvider>
-        </AdminProvider>
+        <InterviewProvider>
+          <RouterProvider router={router} />
+        </InterviewProvider>
       </AuthProvider>
     </HelmetProvider>
   );

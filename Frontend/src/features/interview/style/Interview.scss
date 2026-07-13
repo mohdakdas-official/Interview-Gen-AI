@@ -655,7 +655,10 @@ body,
     flex-direction: row;
   }
   .interview-buttons {
-    width: 250px;
+    width: max-content;
+  }
+  .back-btn {
+    width: max-content;
   }
 
   .center {
@@ -793,7 +796,10 @@ body,
     padding: 13px 18px;
     font-size: 14px;
   }
-
+  .interview-buttons,
+  .back-btn {
+    width: 100%;
+  }
   .btn-text {
     font-size: 14px;
   }

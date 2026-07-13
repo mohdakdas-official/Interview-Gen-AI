@@ -174,7 +174,7 @@ const Interview = () => {
       </div>
     );
   }
-
+  const pageUrl = "https://interviewgen-ai.vercel.app/interview/:interviewId";
   const data = report;
 
   const questions =
@@ -194,13 +194,44 @@ const Interview = () => {
 
         <meta
           name="keywords"
-          content="Interview Report, AI Interview Report, Match Score, Resume Analysis, Skill Gap Analysis, Technical Questions, Behavioral Questions, Interview Preparation"
+          content="Interview Report, AI Interview Report, Match Score, Resume Analysis, Skill Gap Analysis"
         />
 
         <meta name="author" content="InterviewGen AI" />
         <meta name="robots" content="noindex, nofollow" />
 
-        <link rel="canonical" href="https://your-domain.com/interview/report" />
+        <link rel="canonical" href={pageUrl} />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:title"
+          content="Interview Report | InterviewGen AI"
+        />
+        <meta
+          property="og:description"
+          content="View your AI-generated interview report and personalized preparation plan."
+        />
+        <meta property="og:url" content={pageUrl} />
+        <meta
+          property="og:image"
+          content="https://interviewgen-ai.vercel.app/og-image.png"
+        />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Interview Report | InterviewGen AI"
+        />
+        <meta
+          name="twitter:description"
+          content="View your AI-generated interview report and personalized preparation plan."
+        />
+        <meta
+          name="twitter:image"
+          content="https://interviewgen-ai.vercel.app/og-image.png"
+        />
       </Helmet>
       <div className="dashboard-root">
         <div className="dashboard-wrap">
@@ -272,7 +303,7 @@ const Interview = () => {
                 </span>
               </button>
 
-              <Link to={"/"} className="back-btn">
+              <Link to={"/dashboard"} className="back-btn">
                 <MoveLeft size={16} />
                 <span>Go to Dashboard</span>
               </Link>

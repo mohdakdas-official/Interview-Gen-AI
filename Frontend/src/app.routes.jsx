@@ -17,6 +17,13 @@ import AdminLogin from "./features/admin/pages/AdminLogin";
 import AdminProtected from "./features/admin/components/AdminProtected";
 import AdminPublicRoute from "./features/admin/components/AdminPublicRoutes";
 import ForgotPassword from "./features/auth/pages/ForgotPassword";
+import AdminProvider from "./features/admin/context/admin.context";
+import LandingLayout from "./main-landing/layout/LandingLayout";
+import LandingHome from "./main-landing/pages/LandingHome";
+import PrivacyPolicy from "./main-landing/pages/PrivacyPolicy";
+import TermsOfService from "./main-landing/pages/TermsOfService";
+import HelpCenter from "./main-landing/pages/HelpCenter";
+import NotFound from "./main-landing/pages/NotFound";
 
 export const router = createBrowserRouter([
   {
@@ -43,8 +50,9 @@ export const router = createBrowserRouter([
       </Protected>
     ),
   },
+
   {
-    path: "/",
+    path: "/dashboard",
     element: (
       <Protected>
         <Home />
@@ -60,11 +68,13 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: "/admin",
+    path: "/IGAI-admin",
     element: (
-      <AdminProtected>
-        <AdminLayout />
-      </AdminProtected>
+      <AdminProvider>
+        <AdminProtected>
+          <AdminLayout />
+        </AdminProtected>
+      </AdminProvider>
     ),
     children: [
       {
@@ -98,7 +108,7 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: "/admin/login",
+    path: "/IGAI-admin/login",
     element: (
       <AdminPublicRoute>
         <AdminLogin />
@@ -108,5 +118,31 @@ export const router = createBrowserRouter([
   {
     path: "/forgot-password",
     element: <ForgotPassword />,
+  },
+  {
+    path: "/",
+    element: <LandingLayout />,
+    children: [
+      {
+        index: true,
+        element: <LandingHome />,
+      },
+      {
+        path: "privacy-policy",
+        element: <PrivacyPolicy />,
+      },
+      {
+        path: "terms-of-service",
+        element: <TermsOfService />,
+      },
+      {
+        path: "help-center",
+        element: <HelpCenter />,
+      },
+    ],
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);

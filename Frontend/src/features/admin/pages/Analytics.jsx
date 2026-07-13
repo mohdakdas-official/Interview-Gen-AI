@@ -75,7 +75,38 @@ export default function AnalyticsPage() {
         <meta name="author" content="InterviewGen AI" />
         <meta name="robots" content="noindex, nofollow" />
 
-        <link rel="canonical" href="https://your-domain.com/admin/analytics" />
+        <link
+          rel="canonical"
+          href="https://interviewgen-ai.vercel.app/IGAI-admin/analytics"
+        />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Analytics | InterviewGen AI" />
+        <meta
+          property="og:description"
+          content="Analyze user growth, report trends, match scores, skill gap insights, and overall platform performance."
+        />
+        <meta
+          property="og:url"
+          content="https://interviewgen-ai.vercel.app/IGAI-admin/analytics"
+        />
+        <meta
+          property="og:image"
+          content="https://interviewgen-ai.vercel.app/og-image.png"
+        />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Analytics | InterviewGen AI" />
+        <meta
+          name="twitter:description"
+          content="Analyze user growth, report trends, match scores, skill gap insights, and overall platform performance."
+        />
+        <meta
+          name="twitter:image"
+          content="https://interviewgen-ai.vercel.app/og-image.png"
+        />
       </Helmet>
       <div className="space-y-8 p-6 lg:p-8">
         {/* Header */}
@@ -191,13 +222,13 @@ export default function AnalyticsPage() {
               {analytics.cards.storageUsed} MB
             </p>
 
-            <p className="mt-2 text-zinc-400">Used of 500 MB</p>
+            <p className="mt-2 text-zinc-400">Used of 512 MB</p>
 
             <div className="mt-6 h-2 rounded-full bg-zinc-800">
               <div
                 className="h-full rounded-full bg-orange-500"
                 style={{
-                  width: `${(analytics.cards.storageUsed / 500) * 100}%`,
+                  width: `${(analytics.cards.storageUsed / 512) * 100}%`,
                 }}
               />
             </div>

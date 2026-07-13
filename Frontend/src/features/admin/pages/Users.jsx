@@ -15,7 +15,7 @@ import { Helmet } from "react-helmet-async";
 
 export default function Users() {
   const { admin } = useAdmin();
-
+  const [filter, setFilter] = useState("all");
   const [allUsers, setAllUsers] = useState(null);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -23,42 +23,33 @@ export default function Users() {
   const [selectedUser, setSelectedUser] = useState(null);
 
   const fetchUsers = async () => {
+    setLoading(true);
+
     try {
       const { data } = await getUsers({
         page: 1,
         limit: 10,
         search,
+        filter,
       });
 
       setAllUsers(data.Users);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setLoading(false);
-    }
-  };
-  const handleDeleteUser = async (userId) => {
-    try {
-      const { data } = await deleteUser(userId);
-
-      fetchUsers();
-    } catch (error) {
-      console.log(error);
     }
   };
   const confirmDelete = async () => {
     try {
       await deleteUser(selectedUser._id);
 
-      setAllUsers((prev) => ({
-        ...prev,
-        users: prev.users.filter((u) => u._id !== selectedUser._id),
-      }));
-
       setDeleteModal(false);
       setSelectedUser(null);
+
+      await fetchUsers();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -68,7 +59,7 @@ export default function Users() {
     }, 400);
 
     return () => clearTimeout(timer);
-  }, [search]);
+  }, [search, filter]);
 
   if (loading) {
     return (
@@ -77,10 +68,10 @@ export default function Users() {
       </div>
     );
   }
-  if (!Users) {
+  if (!allUsers) {
     return (
       <div className="flex h-[70vh] items-center justify-center text-red-400">
-        Failed to load Users.
+        Failed to load users.
       </div>
     );
   }
@@ -92,7 +83,7 @@ export default function Users() {
 
         <meta
           name="description"
-          content="Manage registered users in the InterviewGen AI Super Admin dashboard. View user details, verification status, activity, and control user access."
+          content="Manage registered users in the InterviewGen AI Super Admin dashboard. View user details, verification status, account activity, and control user access."
         />
 
         <meta
@@ -103,7 +94,41 @@ export default function Users() {
         <meta name="author" content="InterviewGen AI" />
         <meta name="robots" content="noindex, nofollow" />
 
-        <link rel="canonical" href="https://your-domain.com/admin/users" />
+        <link
+          rel="canonical"
+          href="https://interviewgen-ai.vercel.app/IGAI-admin/users"
+        />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="User Management | InterviewGen AI" />
+        <meta
+          property="og:description"
+          content="Manage registered users, verification status, account activity, and access controls from the Super Admin dashboard."
+        />
+        <meta
+          property="og:url"
+          content="https://interviewgen-ai.vercel.app/IGAI-admin/users"
+        />
+        <meta
+          property="og:image"
+          content="https://interviewgen-ai.vercel.app/og-image.png"
+        />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="User Management | InterviewGen AI"
+        />
+        <meta
+          name="twitter:description"
+          content="Manage registered users, verification status, account activity, and access controls from the Super Admin dashboard."
+        />
+        <meta
+          name="twitter:image"
+          content="https://interviewgen-ai.vercel.app/og-image.png"
+        />
       </Helmet>
       <div className="p-6 lg:p-8 space-y-8">
         {/* Header */}
@@ -156,10 +181,19 @@ export default function Users() {
             />
           </div>
 
-          <button className="flex items-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900 px-5 py-3 hover:bg-zinc-800">
-            <Filter size={18} />
-            Filter
-          </button>
+          <select
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+            className="rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3 outline-none"
+          >
+            <option value="all">All Users</option>
+            <option value="verified">Verified</option>
+            <option value="unverified">Unverified</option>
+            <option value="acceptedTerms">Accepted Terms</option>
+            <option value="notAcceptedTerms">Not Accepted Terms</option>
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+          </select>
         </div>
 
         {/* Table */}
@@ -216,7 +250,16 @@ export default function Users() {
                     </span>
                   </td>
 
-                  <td>{new Date(user.createdAt).toLocaleString()}</td>
+                  <td>
+                    {new Date(user.createdAt).toLocaleDateString("en-IN", {
+                      day: "2-digit",
+                      month: "short",
+                      year: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                    })}
+                  </td>
 
                   <td>
                     <div className="flex justify-center gap-2">

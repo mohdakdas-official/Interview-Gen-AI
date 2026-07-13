@@ -13,7 +13,7 @@ export default function AdminProtected({ children }) {
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/admin/login" replace />;
+    return <Navigate to="/IGAI-admin/login" replace />;
   }
 
   return children;

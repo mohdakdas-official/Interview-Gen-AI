@@ -50,7 +50,7 @@ export default function AIUsage() {
   const usage = aiUsage.usage;
   const health = aiUsage.systemHealth;
   const recentRequests = aiUsage.recentRequests;
-  const TOTAL_STORAGE = 500;
+  const TOTAL_STORAGE = 512;
   const storagePercentage = Math.min(
     (cards.storageUsed / TOTAL_STORAGE) * 100,
     100,
@@ -77,27 +77,55 @@ export default function AIUsage() {
 
   return (
     <>
-    <Helmet>
-  <title>AI Usage | InterviewGen AI</title>
+      <Helmet>
+        <title>AI Usage | InterviewGen AI</title>
 
-  <meta
-    name="description"
-    content="Monitor AI usage and Gemini API performance from the Super Admin dashboard. Track AI requests, response times, estimated costs, token consumption, success rates, and recent AI activities."
-  />
+        <meta
+          name="description"
+          content="Monitor AI usage and Gemini API performance from the Super Admin dashboard. Track AI requests, response times, estimated costs, token consumption, success rates, and recent AI activities."
+        />
 
-  <meta
-    name="keywords"
-    content="InterviewGen AI, AI Usage, Gemini API, AI Analytics, Token Usage, API Performance, Admin Dashboard, AI Monitoring"
-  />
+        <meta
+          name="keywords"
+          content="InterviewGen AI, AI Usage, Gemini API, AI Analytics, Token Usage, API Performance, Admin Dashboard, AI Monitoring"
+        />
 
-  <meta name="author" content="InterviewGen AI" />
-  <meta name="robots" content="noindex, nofollow" />
+        <meta name="author" content="InterviewGen AI" />
+        <meta name="robots" content="noindex, nofollow" />
 
-  <link
-    rel="canonical"
-    href="https://your-domain.com/admin/ai-usage"
-  />
-</Helmet>
+        <link
+          rel="canonical"
+          href="https://interviewgen-ai.vercel.app/IGAI-admin/ai-usage"
+        />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="AI Usage | InterviewGen AI" />
+        <meta
+          property="og:description"
+          content="Monitor AI usage, Gemini API performance, token consumption, response times, and platform analytics."
+        />
+        <meta
+          property="og:url"
+          content="https://interviewgen-ai.vercel.app/IGAI-admin/ai-usage"
+        />
+        <meta
+          property="og:image"
+          content="https://interviewgen-ai.vercel.app/og-image.png"
+        />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="AI Usage | InterviewGen AI" />
+        <meta
+          name="twitter:description"
+          content="Monitor AI usage, Gemini API performance, token consumption, response times, and platform analytics."
+        />
+        <meta
+          name="twitter:image"
+          content="https://interviewgen-ai.vercel.app/og-image.png"
+        />
+      </Helmet>
       <div className="space-y-8 p-6 lg:p-8">
         {/* Header */}
 

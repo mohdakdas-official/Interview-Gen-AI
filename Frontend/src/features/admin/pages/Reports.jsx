@@ -15,41 +15,6 @@ import { useAdmin } from "../hooks/useAdmin";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 
-const reports = [
-  {
-    id: 1,
-    candidate: "Akdas Ansari",
-    role: "Frontend Developer",
-    score: 92,
-    status: "Completed",
-    date: "08 Jul 2026",
-  },
-  {
-    id: 2,
-    candidate: "Charlie Brown",
-    role: "Backend Developer",
-    score: 81,
-    status: "Completed",
-    date: "07 Jul 2026",
-  },
-  {
-    id: 3,
-    candidate: "Emma Watson",
-    role: "React Developer",
-    score: 74,
-    status: "Pending",
-    date: "06 Jul 2026",
-  },
-  {
-    id: 4,
-    candidate: "John Smith",
-    role: "Full Stack Developer",
-    score: 65,
-    status: "Failed",
-    date: "05 Jul 2026",
-  },
-];
-
 export default function Reports() {
   const { admin } = useAdmin();
 
@@ -145,7 +110,44 @@ export default function Reports() {
         <meta name="author" content="InterviewGen AI" />
         <meta name="robots" content="noindex, nofollow" />
 
-        <link rel="canonical" href="https://your-domain.com/admin/reports" />
+        <link
+          rel="canonical"
+          href="https://interviewgen-ai.vercel.app/IGAI-admin/reports"
+        />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:title"
+          content="Interview Reports | InterviewGen AI"
+        />
+        <meta
+          property="og:description"
+          content="Manage AI-generated interview reports, review candidate insights, match scores, resume analysis, and skill gap reports."
+        />
+        <meta
+          property="og:url"
+          content="https://interviewgen-ai.vercel.app/IGAI-admin/reports"
+        />
+        <meta
+          property="og:image"
+          content="https://interviewgen-ai.vercel.app/og-image.png"
+        />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Interview Reports | InterviewGen AI"
+        />
+        <meta
+          name="twitter:description"
+          content="Manage AI-generated interview reports, review candidate insights, match scores, resume analysis, and skill gap reports."
+        />
+        <meta
+          name="twitter:image"
+          content="https://interviewgen-ai.vercel.app/og-image.png"
+        />
       </Helmet>
       <div className="space-y-8 p-6 lg:p-8">
         {/* Header */}

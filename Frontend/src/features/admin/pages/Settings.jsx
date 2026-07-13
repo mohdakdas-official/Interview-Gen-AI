@@ -66,7 +66,38 @@ export default function Settings() {
         <meta name="author" content="InterviewGen AI" />
         <meta name="robots" content="noindex, nofollow" />
 
-        <link rel="canonical" href="https://your-domain.com/admin/settings" />
+        <link
+          rel="canonical"
+          href="https://interviewgen-ai.vercel.app/IGAI-admin/settings"
+        />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Settings | InterviewGen AI" />
+        <meta
+          property="og:description"
+          content="Manage Super Admin settings, security, Gemini API configuration, notifications, storage usage, and system preferences."
+        />
+        <meta
+          property="og:url"
+          content="https://interviewgen-ai.vercel.app/IGAI-admin/settings"
+        />
+        <meta
+          property="og:image"
+          content="https://interviewgen-ai.vercel.app/og-image.png"
+        />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Settings | InterviewGen AI" />
+        <meta
+          name="twitter:description"
+          content="Manage Super Admin settings, security, Gemini API configuration, notifications, storage usage, and system preferences."
+        />
+        <meta
+          name="twitter:image"
+          content="https://interviewgen-ai.vercel.app/og-image.png"
+        />
       </Helmet>
       <div className="space-y-8 p-6 lg:p-8">
         {/* Header */}

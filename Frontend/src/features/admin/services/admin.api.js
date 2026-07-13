@@ -25,18 +25,16 @@ export const getDashboard = () => api.get("/dashboard");
    USERS
 =========================== */
 
-export const getUsers = ({
-    page = 1,
-    limit = 10,
-    search = "",
-} = {}) =>
-    api.get("/users", {
+export const getUsers = ({ page, limit, search, filter }) => {
+    return api.get("/users", {
         params: {
             page,
             limit,
             search,
+            filter,
         },
     });
+};
 
 export const getUser = (userId) =>
     api.get(`/users/${userId}`);

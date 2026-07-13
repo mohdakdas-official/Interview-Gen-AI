@@ -1,10 +1,11 @@
 import "../../../style.scss";
 import { useEffect, useState } from "react";
 import "../auth.form.scss";
-import { useNavigate, Link } from "react-router";
+import { useNavigate, Link, NavLink } from "react-router";
 import { useAuth } from "../hooks/useAuth";
 import { getMe } from "../services/auth.api";
 import { Helmet } from "react-helmet-async";
+import { Sparkles } from "lucide-react";
 
 const Login = () => {
   const { loading, handleLogin, authimg } = useAuth();
@@ -46,8 +47,8 @@ const Login = () => {
       const response = await handleLogin({ email, password });
       showToast(response.message, "success");
       setTimeout(() => {
-        navigate("/");
-      }, 2000);
+        navigate("/dashboard");
+      }, 1000);
     } catch (error) {
       console.log(error.response?.message);
       showToast(
@@ -89,7 +90,46 @@ const Login = () => {
 
         <meta
           name="description"
+          content="Login to InterviewGen AI to access AI-powered interview reports, resume analysis, mock interview preparation, and personalized career insights."
+        />
+
+        <meta
+          name="keywords"
+          content="InterviewGen AI, Login, AI Interview, Resume Analysis, Mock Interview, Career Preparation"
+        />
+
+        <meta name="robots" content="index, follow" />
+        <meta name="author" content="InterviewGen AI" />
+
+        {/* Canonical */}
+        <link rel="canonical" href="https://interviewgen-ai.vercel.app/login" />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Login | InterviewGen AI" />
+        <meta
+          property="og:description"
           content="Login to InterviewGen AI and generate AI-powered interview reports."
+        />
+        <meta
+          property="og:url"
+          content="https://interviewgen-ai.vercel.app/login"
+        />
+        <meta
+          property="og:image"
+          content="https://interviewgen-ai.vercel.app/og-image.png"
+        />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Login | InterviewGen AI" />
+        <meta
+          name="twitter:description"
+          content="Login to InterviewGen AI and generate AI-powered interview reports."
+        />
+        <meta
+          name="twitter:image"
+          content="https://interviewgen-ai.vercel.app/og-image.png"
         />
       </Helmet>
       <div className="auth">
@@ -97,8 +137,8 @@ const Login = () => {
 
         <div className="auth__left">
           <img
-            src={authimg[currentIndex]} // {img[currentIndex]}
-            alt=""
+            src={authimg[currentIndex]}
+            alt="showcase-changer"
             className="auth__image"
           />
         </div>
@@ -110,11 +150,19 @@ const Login = () => {
         <div className="auth__right">
           <div className="auth__content">
             <div className="auth__logo-wrapper">
-              <img
-                src="/assets/traskify_main_logo.png"
-                alt="Traskify Logo"
-                className="auth__logo"
-              />
+              <Link to="/" className="flex items-center gap-3">
+                <div className="w-11 h-11 rounded-xl bg-[#FF025E] flex items-center justify-center">
+                  <Sparkles size={20} />
+                </div>
+
+                <div>
+                  <h2 className="font-bold text-xl">Interview Gen AI</h2>
+
+                  <p className="text-xs text-gray-400">
+                    AI Interview Assistant
+                  </p>
+                </div>
+              </Link>
             </div>
 
             <div className="auth__card">
@@ -175,17 +223,17 @@ const Login = () => {
                   }}
                 >
                   <p className="auth__footer">
-                    Forgot your password?
-                    <br />
+                    {/* Forgot your password?
+                    <br /> */}
                     <Link to={"/forgot-password"} className="auth__link">
-                      Click Here
+                      Forgot Password
                     </Link>
                   </p>
                   <p className="auth__footer">
-                    Don't have an account?
-                    <br />
+                    {/* Don't have an account?
+                    <br /> */}
                     <Link to={"/register"} className="auth__link">
-                      register
+                      Create Account
                     </Link>
                   </p>
                 </div>

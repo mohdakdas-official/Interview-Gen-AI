@@ -17,7 +17,7 @@ export default function OverviewWidgets({
   systemHealth,
 }) {
   const MONTHLY_LIMIT = 10000;
-  const TOTAL_STORAGE = 500;
+  const TOTAL_STORAGE = 512;
 
   const usedPercentage = Math.min(
     (cards.aiRequests / MONTHLY_LIMIT) * 100,
@@ -130,13 +130,16 @@ export default function OverviewWidgets({
             Refresh Analytics
           </button>
 
-          <NavLink to={"/admin/reports"} className="flex w-full items-center gap-3 rounded-xl bg-zinc-800 p-3 transition hover:bg-zinc-700 cursor-pointer">
+          <NavLink
+            to={"/IGAI-admin/reports"}
+            className="flex w-full items-center gap-3 rounded-xl bg-zinc-800 p-3 transition hover:bg-zinc-700 cursor-pointer"
+          >
             <FileDown size={18} />
             Manage Reports
           </NavLink>
 
           <NavLink
-            to={"/admin/users"}
+            to={"/IGAI-admin/users"}
             className="flex w-full items-center gap-3 rounded-xl bg-zinc-800 p-3 transition hover:bg-zinc-700 cursor-pointer"
           >
             <Users size={18} />
@@ -144,7 +147,7 @@ export default function OverviewWidgets({
           </NavLink>
 
           <NavLink
-            to={"/admin/settings"}
+            to={"/IGAI-admin/settings"}
             className="flex w-full items-center gap-3 rounded-xl bg-zinc-800 p-3 transition hover:bg-zinc-700 cursor-pointer"
           >
             <ShieldCheck size={18} />

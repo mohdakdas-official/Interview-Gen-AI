@@ -5,7 +5,7 @@ import "../style/home.scss";
 import { Link } from "react-router";
 import { useInterview } from "../hooks/useInterview.js";
 import { useNavigate } from "react-router";
-import { Power, Trash2 } from "lucide-react";
+import { Power, Sparkles, Trash2 } from "lucide-react";
 import { useAuth } from "../../auth/hooks/useAuth";
 
 const Home = () => {
@@ -106,7 +106,38 @@ const Home = () => {
         <meta name="author" content="InterviewGen AI" />
         <meta name="robots" content="noindex, nofollow" />
 
-        <link rel="canonical" href="https://your-domain.com/dashboard" />
+        <link
+          rel="canonical"
+          href="https://interviewgen-ai.vercel.app/dashboard"
+        />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Dashboard | InterviewGen AI" />
+        <meta
+          property="og:description"
+          content="Manage your AI interview reports, resume analysis, skill gap insights, and preparation plans."
+        />
+        <meta
+          property="og:url"
+          content="https://interviewgen-ai.vercel.app/dashboard"
+        />
+        <meta
+          property="og:image"
+          content="https://interviewgen-ai.vercel.app/og-image.png"
+        />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Dashboard | InterviewGen AI" />
+        <meta
+          name="twitter:description"
+          content="Manage your AI interview reports, resume analysis, skill gap insights, and preparation plans."
+        />
+        <meta
+          name="twitter:image"
+          content="https://interviewgen-ai.vercel.app/og-image.png"
+        />
       </Helmet>
       <section className="interview-plan">
         <div className="container select-none">
@@ -208,12 +239,18 @@ const Home = () => {
             <div className="report-create-form">
               <div className="header">
                 <div className="profile-tile">
-                  <Link to="/">
-                    <img
-                      src="../../../../public/assets/traskify_main_logo.png"
-                      className="interview-logo"
-                      alt="Traskify Logo"
-                    />
+                  <Link to="/" className="flex items-center gap-3">
+                    <div className="w-11 h-11 rounded-xl bg-[#FF025E] flex items-center justify-center">
+                      <Sparkles size={20} />
+                    </div>
+
+                    <div>
+                      <h2 className="font-bold text-xl">Interview Gen AI</h2>
+
+                      <p className="text-xs text-gray-400">
+                        AI Interview Assistant
+                      </p>
+                    </div>
                   </Link>
                   <div className="profile-info">
                     <span className="welcome-username">
@@ -335,6 +372,11 @@ e.g. 'Senior Frontend Engineer at Google requires proficiency in React, TypeScri
                       className="small-textarea"
                       placeholder="Briefly describe your experience, key skills, and years of experience if you don't have a resume handy..."
                     />
+                    <div className="mobile-info-box">
+                      ℹ Providing both your <strong>Resume</strong> and
+                      <strong> Self Description</strong> helps our AI create a
+                      more accurate and personalized interview strategy.
+                    </div>
                   </div>
                 </div>
 
@@ -388,9 +430,27 @@ e.g. 'Senior Frontend Engineer at Google requires proficiency in React, TypeScri
               )}
               <div className="footer-links">
                 <div className="footer-links-left">
-                  <Link to={"/"}>Report a bug</Link>
-                  <Link to={"/"}>Give Feedback</Link>
-                  <Link to={"/"}>Suggest New Feature</Link>
+                  <Link
+                    to="https://docs.google.com/forms/d/e/1FAIpQLSfMUtS52mW11AidIMmVdGxcCsR4CxrTEjIIz-Xqs-fmGBS_Ng/viewform"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Report a bug
+                  </Link>
+                  <Link
+                    to="https://docs.google.com/forms/d/e/1FAIpQLSdn7TxCpXcqfbn2wHv1BSvJaDeFCjl5Z02UpuJblS2SG6gn3w/viewform"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Give Feedback
+                  </Link>
+                  <Link
+                    to="https://docs.google.com/forms/d/e/1FAIpQLSd1mbnyc-Vz_gstiU5DtI24rGdxhuAgvmcJuxTmHOE8BVLB8g/viewform"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Suggest New Feature
+                  </Link>
                 </div>
                 <div className="footer-links-right">
                   <Link href="/">Privacy Policy</Link>

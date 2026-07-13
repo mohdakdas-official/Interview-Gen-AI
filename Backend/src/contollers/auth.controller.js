@@ -411,6 +411,14 @@ export const resetPasswordController = async (req, res) => {
                 message: "User not found",
             });
         }
+        const isSamePassword = await bcrypt.compare(password, user.password);
+
+        if (isSamePassword) {
+            return res.status(400).json({
+                message: "New Password cannot be same as old password",
+                success: false
+            })
+        }
 
         // Hash password
         const hashedPassword = await bcrypt.hash(password, 10);

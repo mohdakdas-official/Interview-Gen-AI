@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router";
 import { useAuth } from "../hooks/useAuth";
 import { Helmet } from "react-helmet-async";
+import { Sparkles } from "lucide-react";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -159,7 +160,7 @@ const Register = () => {
 
         <meta
           name="description"
-          content="Create your InterviewGen AI account to generate AI-powered interview reports, resume analysis, skill gap insights, and personalized preparation plans."
+          content="Create your InterviewGen AI account to access AI-powered interview reports, resume analysis, skill gap insights, and personalized preparation plans."
         />
 
         <meta
@@ -168,9 +169,42 @@ const Register = () => {
         />
 
         <meta name="author" content="InterviewGen AI" />
-        <meta name="robots" content="index, follow" />
 
-        <link rel="canonical" href="https://your-domain.com/register" />
+        {/* Don't index authentication pages */}
+        <meta name="robots" content="noindex, nofollow" />
+
+        <link
+          rel="canonical"
+          href="https://interviewgen-ai.vercel.app/register"
+        />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Create Account | InterviewGen AI" />
+        <meta
+          property="og:description"
+          content="Create your InterviewGen AI account and start generating AI-powered interview reports."
+        />
+        <meta
+          property="og:url"
+          content="https://interviewgen-ai.vercel.app/register"
+        />
+        <meta
+          property="og:image"
+          content="https://interviewgen-ai.vercel.app/og-image.png"
+        />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Create Account | InterviewGen AI" />
+        <meta
+          name="twitter:description"
+          content="Create your InterviewGen AI account and start generating AI-powered interview reports."
+        />
+        <meta
+          name="twitter:image"
+          content="https://interviewgen-ai.vercel.app/og-image.png"
+        />
       </Helmet>
       <div className="auth">
         {/* LEFT IMAGE */}
@@ -190,11 +224,19 @@ const Register = () => {
         <div className="auth__right">
           <div className="auth__content">
             <div className="auth__logo-wrapper">
-              <img
-                src="/assets/traskify_main_logo.png"
-                alt="Traskify Logo"
-                className="auth__logo"
-              />
+              <Link to="/" className="flex items-center gap-3">
+                <div className="w-11 h-11 rounded-xl bg-[#FF025E] flex items-center justify-center">
+                  <Sparkles size={20} />
+                </div>
+
+                <div>
+                  <h2 className="font-bold text-xl">Interview Gen AI</h2>
+
+                  <p className="text-xs text-gray-400">
+                    AI Interview Assistant
+                  </p>
+                </div>
+              </Link>
             </div>
 
             <div className="auth__card">
@@ -268,10 +310,17 @@ const Register = () => {
                   <span>
                     I agree to the{" "}
                     <Link
-                      to="/terms-and-conditions"
+                      to="/terms-of-service"
                       className="text-blue-500 hover:underline"
                     >
-                      Terms & Conditions
+                      <strong>Terms of Service</strong>
+                    </Link>
+                    {""} and {""}
+                    <Link
+                      to="/privacy-policy"
+                      className="text-blue-500 hover:underline"
+                    >
+                      <strong>Privacy Policy</strong>
                     </Link>
                   </span>
                 </label>

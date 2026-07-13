@@ -55,7 +55,35 @@ export default function Subscription() {
 
         <link
           rel="canonical"
-          href="https://your-domain.com/admin/subscription"
+          href="https://interviewgen-ai.vercel.app/IGAI-admin/subscription"
+        />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Subscriptions | InterviewGen AI" />
+        <meta
+          property="og:description"
+          content="Manage subscription plans, billing, payments, revenue insights, and premium memberships from the Super Admin dashboard."
+        />
+        <meta
+          property="og:url"
+          content="https://interviewgen-ai.vercel.app/IGAI-admin/subscription"
+        />
+        <meta
+          property="og:image"
+          content="https://interviewgen-ai.vercel.app/og-image.png"
+        />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Subscriptions | InterviewGen AI" />
+        <meta
+          name="twitter:description"
+          content="Manage subscription plans, billing, payments, revenue insights, and premium memberships from the Super Admin dashboard."
+        />
+        <meta
+          name="twitter:image"
+          content="https://interviewgen-ai.vercel.app/og-image.png"
         />
       </Helmet>
       <div className="space-y-8 p-6 lg:p-8 flex items-center justify-center h-[calc(100vh-80px)] flex-col">

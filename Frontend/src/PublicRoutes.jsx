@@ -8,7 +8,7 @@ const PublicRoutes = ({ children }) => {
   //   return <div>Wait, Redirecting...</div>;
   // }
 
-  return user ? <Navigate to="/" replace /> : children;
+  return user ? <Navigate to="/Dashboard" replace /> : children;
 };
 
 export default PublicRoutes;

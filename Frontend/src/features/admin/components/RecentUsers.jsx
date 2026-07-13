@@ -8,7 +8,7 @@ export default function RecentUsers({ users }) {
         <h2 className="text-xl font-semibold">Recent Users</h2>
 
         <NavLink
-          to={"/admin/users"}
+          to={"/IGAI-admin/users"}
           className="cursor-pointer rounded-lg border border-zinc-700 px-4 py-2 text-sm text-white transition hover:bg-zinc-800"
         >
           View All

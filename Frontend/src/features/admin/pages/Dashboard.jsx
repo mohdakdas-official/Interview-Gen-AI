@@ -39,12 +39,10 @@ export default function Dashboard() {
       setLoading(false);
     }
   };
-
   useEffect(() => {
     fetchDashboard();
     setPageRefresh(false);
   }, [pageRefresh]);
-
   if (loading) {
     return (
       <div className="flex h-[70vh] items-center justify-center">
@@ -69,18 +67,55 @@ export default function Dashboard() {
 
         <meta
           name="description"
-          content="Super Admin dashboard for InterviewGen AI. Monitor users, interview reports, analytics, AI usage, storage, subscriptions, system health, and platform performance from a centralized admin panel."
+          content="Super Admin dashboard for InterviewGen AI. Manage users, interview reports, AI usage, analytics, subscriptions, storage, and platform performance."
         />
 
         <meta
           name="keywords"
-          content="InterviewGen AI, Super Admin Dashboard, Admin Panel, User Management, Report Management, Analytics, AI Usage, System Monitoring"
+          content="InterviewGen AI, Super Admin Dashboard, Admin Panel, User Management, Report Management, Analytics, AI Usage, Storage, System Monitoring"
         />
 
         <meta name="author" content="InterviewGen AI" />
         <meta name="robots" content="noindex, nofollow" />
 
-        <link rel="canonical" href="https://your-domain.com/admin" />
+        <link
+          rel="canonical"
+          href="https://interviewgen-ai.vercel.app/IGAI-admin"
+        />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:title"
+          content="Super Admin Dashboard | InterviewGen AI"
+        />
+        <meta
+          property="og:description"
+          content="Centralized admin dashboard for managing InterviewGen AI platform."
+        />
+        <meta
+          property="og:url"
+          content="https://interviewgen-ai.vercel.app/IGAI-admin"
+        />
+        <meta
+          property="og:image"
+          content="https://interviewgen-ai.vercel.app/og-image.png"
+        />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Super Admin Dashboard | InterviewGen AI"
+        />
+        <meta
+          name="twitter:description"
+          content="Centralized admin dashboard for managing InterviewGen AI platform."
+        />
+        <meta
+          name="twitter:image"
+          content="https://interviewgen-ai.vercel.app/og-image.png"
+        />
       </Helmet>
       <div className="w-[100%] p-6 lg:p-8">
         {/* Heading */}

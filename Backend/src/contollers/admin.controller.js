@@ -4,6 +4,7 @@ import { User } from "../models/users.model.js";
 import { interviewReportModel } from "../models/interviewReport.model.js";
 
 
+
 export const adminLogin = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -117,13 +118,12 @@ export const getDashboardData = async (req, res) => {
                         "_id.day": 1,
                     },
                 },
-            ])
+            ]),
         ]);
 
         // ==========================
         // REPORTS
         // ==========================
-
 
         const [
             totalReports,
@@ -188,21 +188,24 @@ export const getDashboardData = async (req, res) => {
                 },
             ]),
         ]);
-        const monthNames = [
-            "",
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
-        ];
+
+        // ==========================
+        // RECENT USERS + REPORT COUNT
+        // ==========================
+
+        const recentUsersWithCount = await Promise.all(
+            recentUsers.map(async (user) => ({
+                user,
+                createdAt: user.createdAt,
+                reportsCount: await interviewReportModel.countDocuments({
+                    user: user._id,
+                }),
+            }))
+        );
+
+        // ==========================
+        // FORMAT GRAPH DATA
+        // ==========================
 
         const dayNames = [
             "",
@@ -224,33 +227,26 @@ export const getDashboardData = async (req, res) => {
             day: dayNames[item._id.day],
             reports: item.total,
         }));
-        const recentReportsWithCount = await Promise.all(
-            recentReports.map(async (report) => ({
-                ...report.toObject(),
-                reportsCount: await interviewReportModel.countDocuments({
-                    user: report.user._id,
-                }),
-            }))
-        );
 
         // ==========================
         // STORAGE
         // ==========================
 
         const db = mongoose.connection.db;
-        const dbStats = await db.stats()
+
         const stats = await db.command({
             collStats: interviewReportModel.collection.collectionName,
         });
 
-
-        const storageUsed = (stats.storageSize / 1024 / 1024).toFixed(2);
+        const storageUsed = (
+            stats.storageSize /
+            1024 /
+            1024
+        ).toFixed(2);
 
         // ==========================
         // AI REQUESTS
         // ==========================
-
-        // Abhi har report = 1 AI Request
 
         const aiRequests = totalReports;
 
@@ -285,13 +281,11 @@ export const getDashboardData = async (req, res) => {
 
         return res.status(200).json({
             success: true,
-
             dashboard: {
                 cards: {
                     totalUsers,
                     verifiedUsers,
                     activeUsers: verifiedUsers,
-
 
                     totalReports,
                     todayReports,
@@ -302,19 +296,23 @@ export const getDashboardData = async (req, res) => {
 
                     averageMatchScore: successRate,
                 },
-                systemHealth,
-                recentUsers: recentReportsWithCount,
 
+                systemHealth,
+
+                // ✅ Fixed
+                recentUsers: recentUsersWithCount,
+
+                // Latest Reports
                 recentReports,
 
                 graphs: {
                     monthlyUsers: formattedMonthlyUsers,
                     reportGraph: formattedReportGraph,
                 },
-            }
+            },
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);
 
         return res.status(500).json({
             success: false,
@@ -328,13 +326,18 @@ export const getUsers = async (req, res) => {
             page = 1,
             limit = 10,
             search = "",
+            filter = "all",
         } = req.query;
 
         page = Number(page);
         limit = Number(limit);
 
         const query = {};
+        let sort = { createdAt: -1 };
 
+        // ==========================
+        // SEARCH
+        // ==========================
         if (search) {
             query.$or = [
                 {
@@ -350,6 +353,37 @@ export const getUsers = async (req, res) => {
                     },
                 },
             ];
+        }
+
+        // ==========================
+        // FILTERS
+        // ==========================
+        switch (filter) {
+            case "verified":
+                query.isVerified = true;
+                break;
+
+            case "unverified":
+                query.isVerified = false;
+                break;
+
+            case "acceptedTerms":
+                query.isAcceptTermsConditions = true;
+                break;
+
+            case "notAcceptedTerms":
+                query.isAcceptTermsConditions = false;
+                break;
+
+            case "oldest":
+                sort = { createdAt: 1 };
+                break;
+
+            case "newest":
+            case "all":
+            default:
+                sort = { createdAt: -1 };
+                break;
         }
 
         const [
@@ -387,9 +421,7 @@ export const getUsers = async (req, res) => {
                 },
 
                 {
-                    $sort: {
-                        createdAt: -1,
-                    },
+                    $sort: sort,
                 },
 
                 {
@@ -399,7 +431,6 @@ export const getUsers = async (req, res) => {
                 {
                     $limit: limit,
                 },
-
             ]),
 
             User.countDocuments(query),
@@ -415,7 +446,6 @@ export const getUsers = async (req, res) => {
 
         return res.status(200).json({
             success: true,
-
             Users: {
                 users,
 
@@ -431,7 +461,7 @@ export const getUsers = async (req, res) => {
                     activeUsers: verifiedUsers,
                     verifiedUsers,
                     unverifiedUsers,
-                }
+                },
             },
         });
     } catch (error) {
@@ -449,22 +479,18 @@ export const getReports = async (req, res) => {
             page = 1,
             limit = 10,
             search = "",
-            minScore = 0,
-            maxScore = 100,
+            filter = "all",
         } = req.query;
 
         page = Number(page);
         limit = Number(limit);
-        minScore = Number(minScore);
-        maxScore = Number(maxScore);
 
-        const query = {
-            matchScore: {
-                $gte: minScore,
-                $lte: maxScore,
-            },
-        };
+        const query = {};
+        let sort = { createdAt: -1 };
 
+        // ==========================
+        // SEARCH
+        // ==========================
         if (search) {
             query.$or = [
                 {
@@ -482,6 +508,43 @@ export const getReports = async (req, res) => {
             ];
         }
 
+        // ==========================
+        // FILTERS
+        // ==========================
+        switch (filter) {
+            case "high":
+                query.matchScore = { $gte: 85 };
+                break;
+
+            case "medium":
+                query.matchScore = {
+                    $gte: 70,
+                    $lt: 85,
+                };
+                break;
+
+            case "low":
+                query.matchScore = { $lt: 70 };
+                break;
+
+            case "today":
+                query.createdAt = {
+                    $gte: new Date(new Date().setHours(0, 0, 0, 0)),
+                    $lte: new Date(new Date().setHours(23, 59, 59, 999)),
+                };
+                break;
+
+            case "oldest":
+                sort = { createdAt: 1 };
+                break;
+
+            case "newest":
+            case "all":
+            default:
+                sort = { createdAt: -1 };
+                break;
+        }
+
         const [
             reports,
             totalReports,
@@ -491,7 +554,7 @@ export const getReports = async (req, res) => {
             interviewReportModel
                 .find(query)
                 .populate("user", "username email")
-                .sort({ createdAt: -1 })
+                .sort(sort)
                 .skip((page - 1) * limit)
                 .limit(limit),
 
@@ -513,9 +576,8 @@ export const getReports = async (req, res) => {
 
             interviewReportModel.countDocuments({
                 createdAt: {
-                    $gte: new Date(
-                        new Date().setHours(0, 0, 0, 0)
-                    ),
+                    $gte: new Date(new Date().setHours(0, 0, 0, 0)),
+                    $lte: new Date(new Date().setHours(23, 59, 59, 999)),
                 },
             }),
         ]);
@@ -556,9 +618,7 @@ export const getReports = async (req, res) => {
                     page,
                     limit,
                     totalReports,
-                    totalPages: Math.ceil(
-                        totalReports / limit
-                    ),
+                    totalPages: Math.ceil(totalReports / limit),
                 },
 
                 stats: {
@@ -568,12 +628,10 @@ export const getReports = async (req, res) => {
 
                     averageMatchScore:
                         averageMatchScore.length > 0
-                            ? Number(
-                                averageMatchScore[0].average
-                            ).toFixed(1)
+                            ? Number(averageMatchScore[0].average).toFixed(1)
                             : 0,
                 },
-            }
+            },
         });
     } catch (error) {
         console.log(error);
@@ -1114,7 +1172,7 @@ export const getSettings = async (req, res) => {
             (stats.storageSize / 1024 / 1024).toFixed(2),
         );
 
-        const storageLimit = 500; // Free MongoDB
+        const storageLimit = 512; // Free MongoDB
 
         const storagePercentage = Number(
             ((storageUsed / storageLimit) * 100).toFixed(1),

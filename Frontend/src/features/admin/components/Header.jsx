@@ -2,6 +2,7 @@ import {
   Bell,
   CalendarDays,
   ChevronDown,
+  FileText,
   LogOut,
   Menu,
   Search,
@@ -42,9 +43,8 @@ export default function Header({ open, setOpen }) {
           message: "",
         });
       }, 3000);
-      setTimeout(() => {
-        navigate("/admin/login");
-      }, 2000);
+
+      navigate("/IGAI-admin/login");
     } catch (error) {
       setToast({
         show: true,
@@ -91,15 +91,34 @@ export default function Header({ open, setOpen }) {
           </div>
 
           {/* Notification */}
-          <button className="relative flex h-11 w-11 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-900 transition hover:bg-zinc-800">
-            <Bell size={20} />
-
-            <span className="absolute right-2 top-2 h-2.5 w-2.5 rounded-full bg-red-500" />
-          </button>
-
-          {/* Profile */}
           <div className="relative group">
-            <button className="flex items-center gap-3 rounded-xl border border-zinc-800 bg-zinc-900 px-3 py-2 transition hover:bg-zinc-800">
+            <button className="cursor-pointer relative flex h-11 w-11 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-900 transition hover:bg-zinc-800">
+              <Bell size={20} />
+
+              <span className="absolute right-2 top-2 h-2.5 w-2.5 rounded-full bg-red-500" />
+            </button>
+            {/* Dropdown */}
+            <div className="invisible absolute right-0 top-[110%] z-50 w-56 rounded-xl border border-zinc-800 bg-zinc-900 p-2 opacity-0 shadow-2xl transition-all duration-200 group-hover:visible group-hover:opacity-100">
+              <NavLink
+                to="/IGAI-admin/reports"
+                className="cursor-pointer flex w-full items-center gap-3 rounded-lg px-3 py-3 text-sm text-zinc-300 transition hover:bg-zinc-800 hover:text-white"
+              >
+                <FileText size={18} />
+                <span>New Reports Available</span>
+              </NavLink>
+
+              <NavLink
+                to="/IGAI-admin/settings"
+                className="cursor-pointer flex w-full items-center gap-3 rounded-lg px-3 py-3 text-sm text-zinc-300 transition hover:bg-zinc-800 hover:text-white"
+              >
+                <Settings size={18} />
+                <span>Settings Changed</span>
+              </NavLink>
+            </div>
+          </div>
+          {/* Profile */}
+          <div className="relative group ">
+            <button className="cursor-pointer flex items-center gap-3 rounded-xl border border-zinc-800 bg-zinc-900 px-3 py-2 transition hover:bg-zinc-800">
               <img
                 src="/assets/admin-images/admin.jpg"
                 alt="Admin"
@@ -121,7 +140,7 @@ export default function Header({ open, setOpen }) {
             {/* Dropdown */}
             <div className="invisible absolute right-0 top-[110%] z-50 w-56 rounded-xl border border-zinc-800 bg-zinc-900 p-2 opacity-0 shadow-2xl transition-all duration-200 group-hover:visible group-hover:opacity-100">
               <NavLink
-                to="/admin/settings"
+                to="/IGAI-admin/settings"
                 className="cursor-pointer flex w-full items-center gap-3 rounded-lg px-3 py-3 text-sm text-zinc-300 transition hover:bg-zinc-800 hover:text-white"
               >
                 <Settings size={18} />

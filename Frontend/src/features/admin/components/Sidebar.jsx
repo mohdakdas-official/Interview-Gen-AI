@@ -8,6 +8,7 @@ import {
   Settings,
   X,
   HardDrive,
+  Sparkles,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router";
@@ -17,37 +18,37 @@ const menuItems = [
   {
     title: "Dashboard",
     icon: LayoutDashboard,
-    path: "/admin",
+    path: "/IGAI-admin",
   },
   {
     title: "Users",
     icon: Users,
-    path: "/admin/users",
+    path: "/IGAI-admin/users",
   },
   {
     title: "Reports",
     icon: FileText,
-    path: "/admin/reports",
+    path: "/IGAI-admin/reports",
   },
   {
     title: "Analytics",
     icon: BarChart3,
-    path: "/admin/analytics",
+    path: "/IGAI-admin/analytics",
   },
   {
     title: "AI Usage",
     icon: Bot,
-    path: "/admin/ai-usage",
+    path: "/IGAI-admin/ai-usage",
   },
   {
     title: "Subscription",
     icon: CreditCard,
-    path: "/admin/subscription",
+    path: "/IGAI-admin/subscription",
   },
   {
     title: "Settings",
     icon: Settings,
-    path: "/admin/settings",
+    path: "/IGAI-admin/settings",
   },
 ];
 
@@ -115,10 +116,16 @@ export default function Sidebar({ open, setOpen }) {
       >
         {/* Logo */}
         <div className="border-b border-zinc-800 px-6 py-6">
-          <h2 className="text-2xl font-bold text-white">InterviewGen AI</h2>
+          <div className="flex items-center justify-center gap-2">
+            <div className="w-11 h-11 rounded-xl bg-[#FF025E] flex items-center justify-center">
+              <Sparkles size={20} />
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold text-white">InterviewGen AI</h2>
 
-          <p className="mt-1 text-sm text-zinc-500">Admin Dashboard</p>
-
+              <p className="mt-1 text-sm text-zinc-500">Admin Dashboard</p>
+            </div>
+          </div>
           <button
             onClick={() => setOpen(false)}
             className="absolute right-5 top-5 rounded-lg p-2 hover:bg-zinc-800 lg:hidden"
