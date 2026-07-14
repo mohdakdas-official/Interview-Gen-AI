@@ -186,7 +186,7 @@ export default function Users() {
         </div>
 
         {/* Table */}
-        <div className="overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900">
+        <div className="lg:overflow-hidden overflow-x-auto rounded-2xl border border-zinc-800 bg-zinc-900">
           <table className="w-full">
             <thead className="bg-zinc-950">
               <tr className="text-left">
