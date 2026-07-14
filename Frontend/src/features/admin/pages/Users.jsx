@@ -12,6 +12,7 @@ import { deleteUser, getUsers } from "../services/admin.api";
 import { useAdmin } from "../hooks/useAdmin";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { baseUrl } from "../../baseURI/baseUrl";
 
 export default function Users() {
   const { admin } = useAdmin();
@@ -94,10 +95,7 @@ export default function Users() {
         <meta name="author" content="InterviewGen AI" />
         <meta name="robots" content="noindex, nofollow" />
 
-        <link
-          rel="canonical"
-          href="https://interviewgen-ai.vercel.app/IGAI-admin/users"
-        />
+        <link rel="canonical" href={`${baseUrl}/IGAI-admin/users`} />
 
         {/* Open Graph */}
         <meta property="og:type" content="website" />
@@ -106,14 +104,8 @@ export default function Users() {
           property="og:description"
           content="Manage registered users, verification status, account activity, and access controls from the Super Admin dashboard."
         />
-        <meta
-          property="og:url"
-          content="https://interviewgen-ai.vercel.app/IGAI-admin/users"
-        />
-        <meta
-          property="og:image"
-          content="https://interviewgen-ai.vercel.app/og-image.png"
-        />
+        <meta property="og:url" content={`${baseUrl}/IGAI-admin/users`} />
+        <meta property="og:image" content={`${baseUrl}/og-image.png`} />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -125,10 +117,7 @@ export default function Users() {
           name="twitter:description"
           content="Manage registered users, verification status, account activity, and access controls from the Super Admin dashboard."
         />
-        <meta
-          name="twitter:image"
-          content="https://interviewgen-ai.vercel.app/og-image.png"
-        />
+        <meta name="twitter:image" content={`${baseUrl}/og-image.png`} />
       </Helmet>
       <div className="p-6 lg:p-8 space-y-8">
         {/* Header */}

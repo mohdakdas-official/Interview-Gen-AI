@@ -13,6 +13,7 @@ import {
   ShieldCheck,
   Save,
 } from "lucide-react";
+import { baseUrl } from "../../baseURI/baseUrl";
 
 export default function Settings() {
   const [settings, setSettings] = useState(null);
@@ -66,10 +67,7 @@ export default function Settings() {
         <meta name="author" content="InterviewGen AI" />
         <meta name="robots" content="noindex, nofollow" />
 
-        <link
-          rel="canonical"
-          href="https://interviewgen-ai.vercel.app/IGAI-admin/settings"
-        />
+        <link rel="canonical" href={`${baseUrl}/IGAI-admin/settings`} />
 
         {/* Open Graph */}
         <meta property="og:type" content="website" />
@@ -78,14 +76,8 @@ export default function Settings() {
           property="og:description"
           content="Manage Super Admin settings, security, Gemini API configuration, notifications, storage usage, and system preferences."
         />
-        <meta
-          property="og:url"
-          content="https://interviewgen-ai.vercel.app/IGAI-admin/settings"
-        />
-        <meta
-          property="og:image"
-          content="https://interviewgen-ai.vercel.app/og-image.png"
-        />
+        <meta property="og:url" content={`${baseUrl}/IGAI-admin/settings`} />
+        <meta property="og:image" content={`${baseUrl}/og-image.png`} />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -94,10 +86,7 @@ export default function Settings() {
           name="twitter:description"
           content="Manage Super Admin settings, security, Gemini API configuration, notifications, storage usage, and system preferences."
         />
-        <meta
-          name="twitter:image"
-          content="https://interviewgen-ai.vercel.app/og-image.png"
-        />
+        <meta name="twitter:image" content={`${baseUrl}/og-image.png`} />
       </Helmet>
       <div className="space-y-8 p-6 lg:p-8">
         {/* Header */}

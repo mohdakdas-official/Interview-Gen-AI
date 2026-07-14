@@ -1,7 +1,8 @@
 import axios from "axios";
+import { baseUrl } from "../../baseURI/baseUrl";
 
 const api = axios.create({
-    baseURL: "http://localhost:8000/api/admin",
+    baseURL: import.meta.env.VITE_API_URL,
     withCredentials: true,
 });
 
@@ -9,24 +10,24 @@ const api = axios.create({
    AUTH
 =========================== */
 
-export const adminLogin = (data) => api.post("/login", data);
+export const adminLogin = (data) => api.post("/api/admin/login", data);
 
-export const adminVerify = () => api.get("/me");
+export const adminVerify = () => api.get("/api/admin/me");
 
-export const adminLogout = () => api.post("/logout");
+export const adminLogout = () => api.post("/api/admin/logout");
 
 /* ===========================
    DASHBOARD
 =========================== */
 
-export const getDashboard = () => api.get("/dashboard");
+export const getDashboard = () => api.get("/api/admin/dashboard");
 
 /* ===========================
    USERS
 =========================== */
 
 export const getUsers = ({ page, limit, search, filter }) => {
-    return api.get("/users", {
+    return api.get("/api/admin/users", {
         params: {
             page,
             limit,
@@ -37,16 +38,16 @@ export const getUsers = ({ page, limit, search, filter }) => {
 };
 
 export const getUser = (userId) =>
-    api.get(`/users/${userId}`);
+    api.get(`/api/admin/users/${userId}`);
 
 export const deleteUser = (userId) =>
-    api.delete(`/users/${userId}`);
+    api.delete(`/api/admin/users/${userId}`);
 
 export const blockUser = (userId) =>
-    api.patch(`/users/${userId}/block`);
+    api.patch(`/api/admin/users/${userId}/block`);
 
 export const unblockUser = (userId) =>
-    api.patch(`/users/${userId}/unblock`);
+    api.patch(`/api/admin/users/${userId}/unblock`);
 
 /* ===========================
    REPORTS
@@ -59,7 +60,7 @@ export const getReports = ({
     minScore = 0,
     maxScore = 100,
 } = {}) =>
-    api.get("/reports", {
+    api.get("/api/admin/reports", {
         params: {
             page,
             limit,
@@ -70,13 +71,13 @@ export const getReports = ({
     });
 
 export const getReport = (reportId) =>
-    api.get(`/reports/${reportId}`);
+    api.get(`/api/admin/reports/${reportId}`);
 
 export const deleteReport = (reportId) =>
     api.delete(`/reports/${reportId}`);
 
 export const downloadReport = (reportId) =>
-    api.get(`/reports/${reportId}/pdf`, {
+    api.get(`/api/admin/reports/${reportId}/pdf`, {
         responseType: "blob",
     });
 
@@ -85,14 +86,14 @@ export const downloadReport = (reportId) =>
 =========================== */
 
 export const getAnalytics = () =>
-    api.get("/analytics");
+    api.get("/api/admin/analytics");
 
 /* ===========================
    AI USAGE
 =========================== */
 
 export const getAIUsage = () =>
-    api.get("/ai-usage");
+    api.get("/api/admin/ai-usage");
 
 /* ===========================
    SUBSCRIPTIONS
@@ -106,9 +107,9 @@ export const getAIUsage = () =>
 =========================== */
 
 export const getSettings = () =>
-    api.get("/settings");
+    api.get("/api/admin/settings");
 
 export const updateSettings = (data) =>
-    api.patch("/settings", data);
+    api.patch("/api/admin/settings", data);
 
 export default api;

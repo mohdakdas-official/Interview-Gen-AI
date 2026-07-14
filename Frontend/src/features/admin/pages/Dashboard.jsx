@@ -20,6 +20,7 @@ import { useAdmin } from "../hooks/useAdmin";
 import { getDashboard } from "../services/admin.api";
 import DashboardAnalytics from "../components/DashboardAnalytics";
 import { Helmet } from "react-helmet-async";
+import { baseUrl } from "../../baseURI/baseUrl";
 
 export default function Dashboard() {
   const { admin } = useAdmin();
@@ -78,10 +79,7 @@ export default function Dashboard() {
         <meta name="author" content="InterviewGen AI" />
         <meta name="robots" content="noindex, nofollow" />
 
-        <link
-          rel="canonical"
-          href="https://interviewgen-ai.vercel.app/IGAI-admin"
-        />
+        <link rel="canonical" href={`${baseUrl}/IGAI-admin`} />
 
         {/* Open Graph */}
         <meta property="og:type" content="website" />
@@ -93,14 +91,8 @@ export default function Dashboard() {
           property="og:description"
           content="Centralized admin dashboard for managing InterviewGen AI platform."
         />
-        <meta
-          property="og:url"
-          content="https://interviewgen-ai.vercel.app/IGAI-admin"
-        />
-        <meta
-          property="og:image"
-          content="https://interviewgen-ai.vercel.app/og-image.png"
-        />
+        <meta property="og:url" content={`${baseUrl}/IGAI-admin`} />
+        <meta property="og:image" content={`${baseUrl}/og-image.png`} />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -112,10 +104,7 @@ export default function Dashboard() {
           name="twitter:description"
           content="Centralized admin dashboard for managing InterviewGen AI platform."
         />
-        <meta
-          name="twitter:image"
-          content="https://interviewgen-ai.vercel.app/og-image.png"
-        />
+        <meta name="twitter:image" content={`${baseUrl}/og-image.png`} />
       </Helmet>
       <div className="w-[100%] p-6 lg:p-8">
         {/* Heading */}

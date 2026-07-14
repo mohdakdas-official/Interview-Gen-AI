@@ -16,6 +16,7 @@ import { useInterview } from "../hooks/useInterview";
 import { Link, useParams } from "react-router";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
+import { baseUrl } from "../../baseURI/baseUrl";
 
 const AccordionCard = ({ idx, item, isOpen, onToggle }) => {
   return (
@@ -174,7 +175,6 @@ const Interview = () => {
       </div>
     );
   }
-  const pageUrl = "https://interviewgen-ai.vercel.app/interview/:interviewId";
   const data = report;
 
   const questions =
@@ -200,7 +200,7 @@ const Interview = () => {
         <meta name="author" content="InterviewGen AI" />
         <meta name="robots" content="noindex, nofollow" />
 
-        <link rel="canonical" href={pageUrl} />
+        <link rel="canonical" href={`${baseUrl}/interview/:interviewId`} />
 
         {/* Open Graph */}
         <meta property="og:type" content="website" />
@@ -212,11 +212,8 @@ const Interview = () => {
           property="og:description"
           content="View your AI-generated interview report and personalized preparation plan."
         />
-        <meta property="og:url" content={pageUrl} />
-        <meta
-          property="og:image"
-          content="https://interviewgen-ai.vercel.app/og-image.png"
-        />
+        <meta property="og:url" content={`${baseUrl}/interview/:interviewId`} />
+        <meta property="og:image" content={`${baseUrl}/og-image.png`} />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -228,10 +225,7 @@ const Interview = () => {
           name="twitter:description"
           content="View your AI-generated interview report and personalized preparation plan."
         />
-        <meta
-          name="twitter:image"
-          content="https://interviewgen-ai.vercel.app/og-image.png"
-        />
+        <meta name="twitter:image" content={`${baseUrl}/og-image.png`} />
       </Helmet>
       <div className="dashboard-root">
         <div className="dashboard-wrap">

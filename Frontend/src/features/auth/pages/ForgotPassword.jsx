@@ -7,6 +7,7 @@ import { Mail, KeyRound, Lock, Sparkles } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
 
 import React from "react";
+import { baseUrl } from "../../baseURI/baseUrl";
 
 const ForgotPassword = () => {
   const [timer, setTimer] = useState(60);
@@ -189,10 +190,7 @@ const ForgotPassword = () => {
         <meta name="robots" content="noindex, nofollow" />
         <meta name="author" content="InterviewGen AI" />
 
-        <link
-          rel="canonical"
-          href="https://interviewgen-ai.vercel.app/forgot-password"
-        />
+        <link rel="canonical" href={`${baseUrl}/forgot-password`} />
 
         {/* Open Graph */}
         <meta property="og:type" content="website" />
@@ -201,14 +199,8 @@ const ForgotPassword = () => {
           property="og:description"
           content="Reset your InterviewGen AI account password securely."
         />
-        <meta
-          property="og:url"
-          content="https://interviewgen-ai.vercel.app/forgot-password"
-        />
-        <meta
-          property="og:image"
-          content="https://interviewgen-ai.vercel.app/og-image.png"
-        />
+        <meta property="og:url" content={`${baseUrl}/forgot-password`} />
+        <meta property="og:image" content={`${baseUrl}/og-image.png`} />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -220,10 +212,7 @@ const ForgotPassword = () => {
           name="twitter:description"
           content="Reset your InterviewGen AI account password securely."
         />
-        <meta
-          name="twitter:image"
-          content="https://interviewgen-ai.vercel.app/og-image.png"
-        />
+        <meta name="twitter:image" content={`${baseUrl}/og-image.png`} />
       </Helmet>
       <section className="min-h-screen bg-[#09090B] flex items-center justify-center px-5 py-10">
         <div className="w-full max-w-md">

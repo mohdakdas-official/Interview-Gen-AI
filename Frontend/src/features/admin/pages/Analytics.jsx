@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { getAnalytics } from "../services/admin.api";
 
 import Analytics from "../components/Analytics";
+import { baseUrl } from "../../baseURI/baseUrl";
 
 export default function AnalyticsPage() {
   const [analytics, setAnalytics] = useState(null);
@@ -75,10 +76,7 @@ export default function AnalyticsPage() {
         <meta name="author" content="InterviewGen AI" />
         <meta name="robots" content="noindex, nofollow" />
 
-        <link
-          rel="canonical"
-          href="https://interviewgen-ai.vercel.app/IGAI-admin/analytics"
-        />
+        <link rel="canonical" href={`${baseUrl}/IGAI-admin/analytics`} />
 
         {/* Open Graph */}
         <meta property="og:type" content="website" />
@@ -87,14 +85,8 @@ export default function AnalyticsPage() {
           property="og:description"
           content="Analyze user growth, report trends, match scores, skill gap insights, and overall platform performance."
         />
-        <meta
-          property="og:url"
-          content="https://interviewgen-ai.vercel.app/IGAI-admin/analytics"
-        />
-        <meta
-          property="og:image"
-          content="https://interviewgen-ai.vercel.app/og-image.png"
-        />
+        <meta property="og:url" content={`${baseUrl}/IGAI-admin/analytics`} />
+        <meta property="og:image" content={`${baseUrl}/og-image.png`} />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -103,10 +95,7 @@ export default function AnalyticsPage() {
           name="twitter:description"
           content="Analyze user growth, report trends, match scores, skill gap insights, and overall platform performance."
         />
-        <meta
-          name="twitter:image"
-          content="https://interviewgen-ai.vercel.app/og-image.png"
-        />
+        <meta name="twitter:image" content={`${baseUrl}/og-image.png`} />
       </Helmet>
       <div className="space-y-8 p-6 lg:p-8">
         {/* Header */}

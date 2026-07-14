@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router";
 import { useAuth } from "../hooks/useAuth";
 import { Helmet } from "react-helmet-async";
 import { Sparkles } from "lucide-react";
+import { baseUrl } from "../../baseURI/baseUrl";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -173,10 +174,7 @@ const Register = () => {
         {/* Don't index authentication pages */}
         <meta name="robots" content="noindex, nofollow" />
 
-        <link
-          rel="canonical"
-          href="https://interviewgen-ai.vercel.app/register"
-        />
+        <link rel="canonical" href={`${baseUrl}/register`} />
 
         {/* Open Graph */}
         <meta property="og:type" content="website" />
@@ -185,14 +183,8 @@ const Register = () => {
           property="og:description"
           content="Create your InterviewGen AI account and start generating AI-powered interview reports."
         />
-        <meta
-          property="og:url"
-          content="https://interviewgen-ai.vercel.app/register"
-        />
-        <meta
-          property="og:image"
-          content="https://interviewgen-ai.vercel.app/og-image.png"
-        />
+        <meta property="og:url" content={`${baseUrl}/register`} />
+        <meta property="og:image" content={`${baseUrl}/og-image.png`} />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -201,10 +193,7 @@ const Register = () => {
           name="twitter:description"
           content="Create your InterviewGen AI account and start generating AI-powered interview reports."
         />
-        <meta
-          name="twitter:image"
-          content="https://interviewgen-ai.vercel.app/og-image.png"
-        />
+        <meta name="twitter:image" content={`${baseUrl}/og-image.png`} />
       </Helmet>
       <div className="auth">
         {/* LEFT IMAGE */}

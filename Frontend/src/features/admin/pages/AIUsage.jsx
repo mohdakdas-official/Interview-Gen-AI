@@ -12,6 +12,7 @@ import {
 import { useEffect, useState } from "react";
 
 import { getAIUsage } from "../services/admin.api";
+import { baseUrl } from "../../baseURI/baseUrl";
 
 export default function AIUsage() {
   const [aiUsage, setAIUsage] = useState(null);
@@ -93,10 +94,7 @@ export default function AIUsage() {
         <meta name="author" content="InterviewGen AI" />
         <meta name="robots" content="noindex, nofollow" />
 
-        <link
-          rel="canonical"
-          href="https://interviewgen-ai.vercel.app/IGAI-admin/ai-usage"
-        />
+        <link rel="canonical" href={`${baseUrl}/IGAI-admin/ai-usage`} />
 
         {/* Open Graph */}
         <meta property="og:type" content="website" />
@@ -105,14 +103,8 @@ export default function AIUsage() {
           property="og:description"
           content="Monitor AI usage, Gemini API performance, token consumption, response times, and platform analytics."
         />
-        <meta
-          property="og:url"
-          content="https://interviewgen-ai.vercel.app/IGAI-admin/ai-usage"
-        />
-        <meta
-          property="og:image"
-          content="https://interviewgen-ai.vercel.app/og-image.png"
-        />
+        <meta property="og:url" content={`${baseUrl}/IGAI-admin/ai-usage`} />
+        <meta property="og:image" content={`${baseUrl}/og-image.png`} />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -121,10 +113,7 @@ export default function AIUsage() {
           name="twitter:description"
           content="Monitor AI usage, Gemini API performance, token consumption, response times, and platform analytics."
         />
-        <meta
-          name="twitter:image"
-          content="https://interviewgen-ai.vercel.app/og-image.png"
-        />
+        <meta name="twitter:image" content={`${baseUrl}/og-image.png`} />
       </Helmet>
       <div className="space-y-8 p-6 lg:p-8">
         {/* Header */}

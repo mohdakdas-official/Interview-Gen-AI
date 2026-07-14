@@ -4,6 +4,7 @@ import { adminLogin } from "../services/admin.api";
 import Toast from "../components/Toast";
 import { useNavigate } from "react-router";
 import { Helmet } from "react-helmet-async";
+import { baseUrl } from "../../baseURI/baseUrl";
 
 export default function AdminLogin() {
   const [showPassword, setShowPassword] = useState(false);
@@ -116,10 +117,7 @@ export default function AdminLogin() {
         <meta name="author" content="InterviewGen AI" />
         <meta name="robots" content="noindex, nofollow" />
 
-        <link
-          rel="canonical"
-          href="https://interviewgen-ai.vercel.app/IGAI-admin/login"
-        />
+        <link rel="canonical" href={`${baseUrl}/IGAI-admin/login`} />
 
         {/* Open Graph */}
         <meta property="og:type" content="website" />
@@ -131,14 +129,8 @@ export default function AdminLogin() {
           property="og:description"
           content="Secure Super Admin login for InterviewGen AI administration panel."
         />
-        <meta
-          property="og:url"
-          content="https://interviewgen-ai.vercel.app/IGAI-admin/login"
-        />
-        <meta
-          property="og:image"
-          content="https://interviewgen-ai.vercel.app/og-image.png"
-        />
+        <meta property="og:url" content={`${baseUrl}/IGAI-admin/login`} />
+        <meta property="og:image" content={`${baseUrl}/og-image.png`} />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -150,10 +142,7 @@ export default function AdminLogin() {
           name="twitter:description"
           content="Secure Super Admin login for InterviewGen AI administration panel."
         />
-        <meta
-          name="twitter:image"
-          content="https://interviewgen-ai.vercel.app/og-image.png"
-        />
+        <meta name="twitter:image" content={`${baseUrl}/og-image.png`} />
       </Helmet>
       <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-zinc-950 px-4">
         {/* Background Glow */}

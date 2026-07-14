@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
+import { baseUrl } from "../../features/baseURI/baseUrl";
 
 const PrivacyPolicy = () => {
   return (
@@ -14,10 +15,7 @@ const PrivacyPolicy = () => {
 
         <meta name="robots" content="index, follow" />
 
-        <link
-          rel="canonical"
-          href="https://interviewgen-ai.vercel.app/privacy-policy"
-        />
+        <link rel="canonical" href={`${baseUrl}/privacy-policy`} />
       </Helmet>
 
       <div className="min-h-screen bg-[#030712] text-gray-300">

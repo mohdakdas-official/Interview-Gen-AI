@@ -7,6 +7,7 @@ import { useInterview } from "../hooks/useInterview.js";
 import { useNavigate } from "react-router";
 import { Power, Sparkles, Trash2 } from "lucide-react";
 import { useAuth } from "../../auth/hooks/useAuth";
+import { baseUrl } from "../../baseURI/baseUrl.js";
 
 const Home = () => {
   const { loading, generateReport, reports, getReports, deleteReport } =
@@ -106,10 +107,7 @@ const Home = () => {
         <meta name="author" content="InterviewGen AI" />
         <meta name="robots" content="noindex, nofollow" />
 
-        <link
-          rel="canonical"
-          href="https://interviewgen-ai.vercel.app/dashboard"
-        />
+        <link rel="canonical" href={`${baseUrl}/dashboard`} />
 
         {/* Open Graph */}
         <meta property="og:type" content="website" />
@@ -118,14 +116,8 @@ const Home = () => {
           property="og:description"
           content="Manage your AI interview reports, resume analysis, skill gap insights, and preparation plans."
         />
-        <meta
-          property="og:url"
-          content="https://interviewgen-ai.vercel.app/dashboard"
-        />
-        <meta
-          property="og:image"
-          content="https://interviewgen-ai.vercel.app/og-image.png"
-        />
+        <meta property="og:url" content={`${baseUrl}/dashboard`} />
+        <meta property="og:image" content={`${baseUrl}/og-image.png`} />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -134,10 +126,7 @@ const Home = () => {
           name="twitter:description"
           content="Manage your AI interview reports, resume analysis, skill gap insights, and preparation plans."
         />
-        <meta
-          name="twitter:image"
-          content="https://interviewgen-ai.vercel.app/og-image.png"
-        />
+        <meta name="twitter:image" content={`${baseUrl}/og-image.png`} />
       </Helmet>
       <section className="interview-plan">
         <div className="container select-none">

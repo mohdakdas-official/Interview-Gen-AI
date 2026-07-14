@@ -30,6 +30,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { Link } from "react-router";
+import { baseUrl } from "../../features/baseURI/baseUrl";
 
 const features = [
   {
@@ -97,7 +98,7 @@ export default function Home() {
           content="/assets/interviewgenai-favicon.svg"
         />
 
-        <meta property="og:url" content="https://interviewgen-ai.vercel.app" />
+        <meta property="og:url" content={baseUrl} />
 
         <meta name="twitter:card" content="summary_large_image" />
 
@@ -107,7 +108,7 @@ export default function Home() {
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
             name: "InterviewGen AI",
-            url: "https://interviewgen-ai.vercel.app",
+            url: { baseUrl },
             applicationCategory: "BusinessApplication",
             operatingSystem: "Web",
             description:

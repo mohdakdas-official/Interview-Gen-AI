@@ -6,6 +6,7 @@ import { useAuth } from "../hooks/useAuth";
 import { getMe } from "../services/auth.api";
 import { Helmet } from "react-helmet-async";
 import { Sparkles } from "lucide-react";
+import { baseUrl } from "../../baseURI/baseUrl";
 
 const Login = () => {
   const { loading, handleLogin, authimg } = useAuth();
@@ -102,7 +103,7 @@ const Login = () => {
         <meta name="author" content="InterviewGen AI" />
 
         {/* Canonical */}
-        <link rel="canonical" href="https://interviewgen-ai.vercel.app/login" />
+        <link rel="canonical" href={`${baseUrl}/login`} />
 
         {/* Open Graph */}
         <meta property="og:type" content="website" />
@@ -111,14 +112,8 @@ const Login = () => {
           property="og:description"
           content="Login to InterviewGen AI and generate AI-powered interview reports."
         />
-        <meta
-          property="og:url"
-          content="https://interviewgen-ai.vercel.app/login"
-        />
-        <meta
-          property="og:image"
-          content="https://interviewgen-ai.vercel.app/og-image.png"
-        />
+        <meta property="og:url" content={`${baseUrl}/login`} />
+        <meta property="og:image" content={`${baseUrl}/og-image.png`} />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -127,10 +122,7 @@ const Login = () => {
           name="twitter:description"
           content="Login to InterviewGen AI and generate AI-powered interview reports."
         />
-        <meta
-          name="twitter:image"
-          content="https://interviewgen-ai.vercel.app/og-image.png"
-        />
+        <meta name="twitter:image" content={`${baseUrl}/og-image.png`} />
       </Helmet>
       <div className="auth">
         {/* LEFT IMAGE */}
