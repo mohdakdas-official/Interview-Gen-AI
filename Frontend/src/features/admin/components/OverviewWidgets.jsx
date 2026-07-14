@@ -123,7 +123,7 @@ export default function OverviewWidgets({
 
         <div className="space-y-3">
           <button
-            onClick={() => setPageRefresh((prev) => !prev)}
+            onClick={() => setPageRefresh(true)}
             className="flex w-full items-center gap-3 rounded-xl bg-zinc-800 p-3 transition hover:bg-zinc-700 cursor-pointer"
           >
             <RefreshCw size={18} />
