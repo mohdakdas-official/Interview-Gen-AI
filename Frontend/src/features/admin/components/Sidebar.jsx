@@ -116,14 +116,20 @@ export default function Sidebar({ open, setOpen }) {
       >
         {/* Logo */}
         <div className="border-b border-zinc-800 px-6 py-6">
-          <div className="flex items-center justify-center gap-2">
-            <div className="w-11 h-11 rounded-xl bg-[#FF025E] flex items-center justify-center">
+          <div className="flex items-center gap-4 min-w-0">
+            {" "}
+            <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-[#FF025E]">
+              {" "}
               <Sparkles size={20} />
             </div>
-            <div>
-              <h2 className="text-2xl font-bold text-white">InterviewGen AI</h2>
-
-              <p className="mt-1 text-sm text-zinc-500">Admin Dashboard</p>
+            <div className="min-w-0 flex-1">
+              {" "}
+              <h2 className="truncate text-2xl font-bold text-white">
+                InterviewGen AI
+              </h2>{" "}
+              <p className="mt-1 truncate text-sm text-zinc-500">
+                Admin Dashboard
+              </p>
             </div>
           </div>
           <button
