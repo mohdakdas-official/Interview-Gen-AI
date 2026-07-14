@@ -1,1 +1,1 @@
-export const baseUrl = "http://localhost:5173"
+export const baseUrl = "https://interview-gen-ai-ruby.vercel.app"
