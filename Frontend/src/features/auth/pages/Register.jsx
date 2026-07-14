@@ -171,8 +171,7 @@ const Register = () => {
 
         <meta name="author" content="InterviewGen AI" />
 
-        {/* Don't index authentication pages */}
-        <meta name="robots" content="noindex, nofollow" />
+        <meta name="robots" content="index, follow" />
 
         <link rel="canonical" href={`${baseUrl}/register`} />
 
