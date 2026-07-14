@@ -442,9 +442,9 @@ e.g. 'Senior Frontend Engineer at Google requires proficiency in React, TypeScri
                   </Link>
                 </div>
                 <div className="footer-links-right">
-                  <Link href="/privacy-policy">Privacy Policy</Link>
-                  <Link href="/terms-of-service">Terms of Service</Link>
-                  <Link href="/help-center">Help Center</Link>
+                  <Link to="/privacy-policy">Privacy Policy</Link>
+                  <Link to="/terms-of-service">Terms of Service</Link>
+                  <Link to="/help-center">Help Center</Link>
                 </div>
               </div>
             </div>
