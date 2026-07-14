@@ -8,7 +8,11 @@ router.post("/login", adminLogin);
 router.get("/me", verifyAdmin, getAdmin);
 
 router.post("/logout", (req, res) => {
-    res.clearCookie("adminToken");
+    res.clearCookie("adminToken", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+    });
 
     res.json({
         success: true,

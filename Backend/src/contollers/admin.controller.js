@@ -29,8 +29,8 @@ export const adminLogin = async (req, res) => {
 
         res.cookie("adminToken", token, {
             httpOnly: true,
-            sameSite: "lax",
-            secure: false, // production me true
+            secure: true,
+            sameSite: "none",
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
 

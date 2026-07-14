@@ -156,7 +156,8 @@ export const verifyOtpController = async (req, res) => {
             .cookie("token", token, {
                 httpOnly: true,
                 secure: true,
-                sameSite: "strict",
+                sameSite: "none",
+                maxAge: 24 * 60 * 60 * 1000,
             })
             .json({
                 success: true,
@@ -224,7 +225,8 @@ export const loginUserController = async (req, res) => {
     return res.status(200).cookie("token", token, {
         httpOnly: true,
         secure: true,
-        sameSite: "strict"
+        sameSite: "none",
+        maxAge: 24 * 60 * 60 * 1000,
     }).json({
         message: "Login Successfull",
         success: true,
@@ -258,7 +260,7 @@ export const logoutUserController = async (req, res) => {
     res.clearCookie("token", {
         httpOnly: true,
         secure: true,
-        sameSite: "strict"
+        sameSite: "none",
     });
 
     return res.status(200).json({
