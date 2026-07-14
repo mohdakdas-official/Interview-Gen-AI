@@ -9,4 +9,4 @@ Disallow: /dashboard/
 Disallow: /interview/
 Disallow: /IGAI-admin/
 
-Sitemap: https://interviewgen-ai.vercel.app/sitemap.xml
+Sitemap: https://interview-gen-ai-ruby.vercel.app/sitemap.xml
