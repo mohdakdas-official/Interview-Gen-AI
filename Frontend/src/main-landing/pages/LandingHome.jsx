@@ -93,10 +93,7 @@ export default function Home() {
 
         <meta property="og:type" content="website" />
 
-        <meta
-          property="og:image"
-          content="/assets/interviewgenai-favicon.svg"
-        />
+        <meta property="og:image" content={`${baseUrl}/og-image.png`} />
 
         <meta property="og:url" content={baseUrl} />
 
@@ -108,7 +105,7 @@ export default function Home() {
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
             name: "InterviewGen AI",
-            url: { baseUrl },
+            url: baseUrl,
             applicationCategory: "BusinessApplication",
             operatingSystem: "Web",
             description:
