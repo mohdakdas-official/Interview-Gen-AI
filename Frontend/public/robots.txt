@@ -5,7 +5,7 @@ Allow: /
 Disallow: /login
 Disallow: /register
 Disallow: /forgot-password
-Disallow: /dashboard
+Disallow: /dashboard/
 Disallow: /interview/
 Disallow: /IGAI-admin/
 
