@@ -133,7 +133,7 @@ export default function Header({ open, setOpen }) {
                 setNotificationOpen((prev) => !prev);
                 setProfileOpen(false);
               }}
-              className="relative flex h-11 w-11 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-900 transition hover:bg-zinc-800"
+              className="cursor-pointer relative flex h-11 w-11 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-900 transition hover:bg-zinc-800"
             >
               {" "}
               <Bell size={20} />
@@ -171,7 +171,7 @@ export default function Header({ open, setOpen }) {
                 setProfileOpen((prev) => !prev);
                 setNotificationOpen(false);
               }}
-              className="flex items-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900 px-2 sm:px-3 py-2 transition hover:bg-zinc-800"
+              className="cursor-pointer flex items-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900 px-2 sm:px-3 py-2 transition hover:bg-zinc-800"
             >
               {" "}
               <img
